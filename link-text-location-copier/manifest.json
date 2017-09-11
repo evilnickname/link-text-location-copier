@@ -11,6 +11,11 @@
         ]
     },
 
+    "icons": {
+      "48": "link-interface-symbol.svg",
+      "96": "link-interface-symbol.svg"
+    },
+
     "permissions": [
         "activeTab",
         "contextMenus",
