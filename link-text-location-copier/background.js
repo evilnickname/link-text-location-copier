@@ -5,6 +5,12 @@ browser.contextMenus.create({
 });
 
 browser.contextMenus.create({
+  id: "separator-1",
+  type: "separator",
+  contexts: ["link"]
+});
+
+browser.contextMenus.create({
   id: "link-plain-text",
   title: "Copy link text and location as plain text",
   contexts: ["link"]
@@ -38,13 +44,13 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
         case "link-plain-text":
             text = `${info.linkText} — ${info.linkUrl}`;
             break;
-        case "coltl-link-html":
+        case "link-html":
             text = `<a href="${info.linkUrl}">${info.linkText}</a>`;
             break;
-        case "coltl-page-plain-text":
+        case "page-plain-text":
             text = `${tab.title} — ${tab.url}`;
             break;
-        case "coltl-page-html":
+        case "page-html":
             text = `<a href="${tab.title}">${tab.url}</a>`;
             break;
 
