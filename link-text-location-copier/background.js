@@ -35,28 +35,36 @@ browser.contextMenus.create({
 });
 
 browser.contextMenus.onClicked.addListener(function(info, tab) {
-    let text;
+    let title, link, outputtext;
+    
+    if (info.menuItemId.indexOf('link-') === 0) {
+        link = info.linkUrl;
+        title = info.linkText;
+    } else if (info.menuItemId.indexOf('page-') === 0) {
+        link = tab.url;
+        title = tab.title;
+    }
 
     switch (info.menuItemId) {
         case "link-text-only":
-            text = info.linkText;
+            outputtext = title;
             break;
         case "link-plain-text":
-            text = `${info.linkText} — ${info.linkUrl}`;
+            outputtext = `${title} — ${link}`;
             break;
         case "link-html":
-            text = `<a href="${info.linkUrl}">${info.linkText}</a>`;
+            outputtext = `<a href="${link}">${title}</a>`;
             break;
         case "page-plain-text":
-            text = `${tab.title} — ${tab.url}`;
+            outputtext = `${title} — ${link}`;
             break;
         case "page-html":
-            text = `<a href="${tab.title}">${tab.url}</a>`;
+            outputtext = `<a href="${link}">${title}</a>`;
             break;
 
     }
 
-    const code = "copyToClipboard(" + JSON.stringify(text) + ");";
+    const code = "copyToClipboard(" + JSON.stringify(outputtext) + ");";
 
     browser.tabs.executeScript({
         code: "typeof copyToClipboard === 'function';",
