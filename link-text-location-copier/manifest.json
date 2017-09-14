@@ -2,12 +2,12 @@
     "manifest_version": 2,
     "name": "Link Text and Location Copier",
     "description": "Copies either a link's text and location or the page's title and location to the clipboard from the context menu. Heavily inspired by the CoLT add-on.",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "homepage_url": "https://github.com/evilnickname/link-text-location-copier",
 
     "background": {
         "scripts": [
-            "background.js"
+            "linktextlocationcopier.js"
         ]
     },
 

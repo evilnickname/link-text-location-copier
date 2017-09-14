@@ -7,6 +7,6 @@ Heavily inspired by the [CoLT](https://github.com/jgbishop/colt) add-on, using c
 
 ## Possible TODOs
 * ~~Add fancy icon~~
-* Add more 'copy as' formats (Markdown, BBCode, what-have-you)
+* ~~Add more 'copy as' formats (Markdown, BBCode, what-have-you)~~
 * Internationalization
 * Make configurable
