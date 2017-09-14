@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Link Text and Location Copier test page</title>
+    <link rel="icon" href="link-text-location-copier/link-interface-symbol.svg" sizes="any" type="image/svg+xml">
+  </head>
+  <body>
+    <ul>
+      <li>
+        <a href="https://github.com/evilnickname/link-text-location-copier">Link to the Link Text and Location Copier homepage<a>
+      </li>
+      <li>
+        <a href="http://example.com/testlink-with-(parentheses)">Link with parentheses<a> (might be troublesome with Markdown)
+      </li>
+    </ul>
+    <input type="text" style="width: 100%" id="output" />
+    <script>
+      document.getElementById('output').addEventListener('focus', function() {
+        this.value = null;
+      });
+    </script>
+  </body>
+</html>
