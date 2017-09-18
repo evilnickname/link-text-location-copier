@@ -1,24 +1,24 @@
 const defaults = {
   link: {
     menuItems: ['title', 'separator', 'plain', 'html', 'separator', 'markdown', 'bbcode'],
-    title: 'Copy link text and location as'
+    title: browser.i18n.getMessage('copyLinkLocationString')
   },
   page: {
     menuItems: ['plain', 'html', 'separator', 'markdown', 'bbcode'],
-    title: 'Copy page title and location as'
+    title: browser.i18n.getMessage('copyPageLocationString')
   }
 };
 
 const menuItems = {
   title: {
     slug: 'title',
-    title: 'Copy link title',
+    title: browser.i18n.getMessage('copyLinkTextString'),
     template: '%T'
   },
   separator: { type: 'separator' },
   plain: {
     slug: 'plain',
-    displayName: 'plain text',
+    displayName: browser.i18n.getMessage('plainTextString'),
     template: '%T — %U'
   },
   html: {

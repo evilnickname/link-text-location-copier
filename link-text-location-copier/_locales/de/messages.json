@@ -1,0 +1,18 @@
+{
+  "copyLinkLocationString": {
+    "message": "Link-Text und -Adresse kopieren als",
+    "description": "Translation of 'Copy link text and location as'"
+  },
+  "copyPageLocationString": {
+    "message": "Seitentitel und -adresse kopieren",
+    "description": "Translation of 'Copy page title and location as'"
+  },
+  "copyLinkTextString": {
+    "message": "Link-Text kopieren",
+    "description": "Translation of 'Copy link text'"
+  },
+  "plainTextString": {
+    "message": "reine Textversion",
+    "description": "Translation of 'plain text'"
+  }
+}

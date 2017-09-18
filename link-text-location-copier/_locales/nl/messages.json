@@ -1,0 +1,23 @@
+{
+  "extensionDescription": {
+    "message": "Kopieert de tekst en het adres van een koppeling, of de titel en het adres van de pagina vanuit het contextmenu. Gebaseerd op de CoLT add-on.",
+    "description": "Description of the extension."
+  },
+
+  "copyLinkLocationString": {
+    "message": "Kopieer koppelingstekst en -adres als",
+    "description": "Translation of 'Copy link text and location as'"
+  },
+  "copyPageLocationString": {
+    "message": "Kopieer paginatitel en -adres als",
+    "description": "Translation of 'Copy page title and location as'"
+  },
+  "copyLinkTextString": {
+    "message": "Kopieer koppelingstekst",
+    "description": "Translation of 'Copy link text'"
+  },
+  "plainTextString": {
+    "message": "platte tekst",
+    "description": "Translation of 'plain text'"
+  }
+}
