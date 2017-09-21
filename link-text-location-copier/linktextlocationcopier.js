@@ -69,18 +69,27 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
   let title,
       link,
       outputtext,
+      clickedContext = info.menuItemId.substring(0, info.menuItemId.indexOf('-')),
       clickedItemName = info.menuItemId.substring(info.menuItemId.indexOf('-') + 1);
 
-  if (info.menuItemId.indexOf('link-') === 0) {
-    link = info.linkUrl;
-    title = info.linkText;
-  } else if (info.menuItemId.indexOf('page-') === 0) {
-    link = tab.url;
-    title = tab.title;
+  console.log(info)
+
+  link = (info.pageUrl) ? info.pageUrl : '';
+
+  switch(clickedContext) {
+    case 'page':
+      text = tab.title;
+      break;
+    case 'selection':
+      text = info.selectionText;
+      break;
+    default:
+      text = (info.linkText) ? info.linkText : '';
+      break;
   }
 
   outputtext = menuItems[clickedItemName].template;
-  outputtext = outputtext.replace(/%T/, title);
+  outputtext = outputtext.replace(/%T/, text);
   outputtext = outputtext.replace(/%U/, link);
 
   const code = 'copyToClipboard(' + JSON.stringify(outputtext) + ');';

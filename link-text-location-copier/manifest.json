@@ -13,8 +13,8 @@
     },
 
     "icons": {
-      "48": "icons/link-interface-symbol.svg",
-      "96": "icons/link-interface-symbol.svg"
+      "48": "/icons/paint-brush.svg",
+      "96": "/icons/paint-brush.svg"
     },
 
     "permissions": [
