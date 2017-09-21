@@ -4,8 +4,12 @@
     "description": "Translation of 'Copy link text and location as'"
   },
   "copyPageLocationString": {
-    "message": "Seitentitel und -adresse kopieren",
+    "message": "Seitentitel und -adresse kopieren als",
     "description": "Translation of 'Copy page title and location as'"
+  },
+  "copySelectionLocationString": {
+    "message": "Ausgewählter Text und Seitenadresse kopieren als",
+    "description": "Translation of 'Copy text selection and location as'"
   },
   "copyLinkTextString": {
     "message": "Link-Text kopieren",

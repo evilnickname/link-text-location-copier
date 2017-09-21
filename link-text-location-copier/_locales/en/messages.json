@@ -1,6 +1,6 @@
 {
   "extensionDescription": {
-    "message": "Copies either a link's text and location or the page's title and location to the clipboard from the context menu. Heavily inspired by the CoLT add-on.",
+    "message": "Copy links in various formats to the clipboard from the context menu. Heavily inspired by the CoLT add-on.",
     "description": "Description of the extension."
   },
 
@@ -11,6 +11,10 @@
   "copyPageLocationString": {
     "message": "Copy page title and location as",
     "description": "Translation of 'Copy page title and location as'"
+  },
+  "copySelectionLocationString": {
+    "message": "Copy text selection and page location as",
+    "description": "Translation of 'Copy text selection and location as'"
   },
   "copyLinkTextString": {
     "message": "Copy link text",
