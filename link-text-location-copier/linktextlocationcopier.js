@@ -75,7 +75,7 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
       clickedItemName = info.menuItemId.substring(info.menuItemId.indexOf('-') + 1);
 
   if (info.menuItemId.indexOf('link-') === 0) {
-    link = info.pageUrl;
+    link = info.linkUrl;
     text = info.linkText;
   } else if (info.menuItemId.indexOf('page-') === 0) {
     link = tab.url;
