@@ -1,0 +1,138 @@
+*, *::before, *::after {
+  box-shadow: border-box;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font: 16px/1.5 'Fira Sans';
+  background-color: #f9f9f9;
+  background-image: linear-gradient(#eee 1px, transparent 1px);
+  background-size: 100% 1.5rem;
+}
+
+main, header, footer {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+h2, h3, p {
+  margin-bottom: 1.5rem;
+}
+
+article {
+  outline: 1px solid red;
+  margin: 3rem 1.5rem;
+}
+
+h1, h2, h3, th {
+  font-family: 'Fira Mono';
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  border-bottom: currentColor 1px solid;
+}
+
+header {
+  margin: 1.5rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+}
+header > img {
+  display: block;
+  width: 4.5rem;
+  margin-right: 1rem;
+}
+header > h1 {
+  font-size: 2rem;
+  vertical-align: middle
+}
+
+.changelog__version,
+.changelog__pubdate {
+    font-family: 'Fira Mono';
+}
+.changelog__version {
+  font-weight: bold;
+}
+
+.screenshot__image { height: 6rem }
+
+
+.alert {
+	padding: 1.5rem;
+	margin-bottom: 1.5rem;
+	border: 1px solid transparent;
+	border-radius: .25rem;
+	background-color: #d9edf7;
+	border-color: #bcdff1;
+	color: #31708f;
+}
+
+.alert img {
+  height: 1em;
+}
+.alert a {
+	color: #245269;
+}
+
+.alert__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+  vertical-align: text-top;
+}
+
+/* ==========================================
+Single-colored icons can be modified like so:
+.icon-name {
+  font-size: 32px;
+  color: red;
+}
+========================================== */
+
+.icon-twitter {
+  width: 0.9287109375em;
+}
+
+.icon-image {
+  width: 1.0712890625em;
+}
+
+.icon-book {
+  width: 0.9306640625em;
+}
+
+.icon-edit {
+  width: 1.0009765625em;
+}
+
+.icon-github-alt {
+  width: 0.9287109375em;
+}
+
+
+/* http://codepo8.github.io/css-fork-on-github-ribbon/ */
+.forkongithub a { background:#000; color:#fff;text-decoration:none;font-family:arial,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}
+.forkongithub a:hover{background:#c11;color:#fff;}
+.forkongithub a::before, .forkongithub a::after { content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}
+.forkongithub a::after{bottom:1px;top:auto;}
+@media screen and (min-width:800px) {
+  .forkongithub{position:fixed;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}
+  .forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}
+}
