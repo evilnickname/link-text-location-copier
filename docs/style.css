@@ -1,43 +1,40 @@
 *, *::before, *::after {
-  box-shadow: border-box;
+  box-sizing: border-box;
   font-size: 100%;
   margin: 0;
   padding: 0;
 }
-
 html {
-  font: 16px/1.5 'Fira Sans';
+  font: 20px/1.5 'Fira Sans';
   background-color: #f9f9f9;
+/*
   background-image: linear-gradient(#eee 1px, transparent 1px);
   background-size: 100% 1.5rem;
+*/
 }
-
 main, header, footer {
   max-width: 960px;
   margin: 0 auto;
 }
-
 h2, h3, p {
   margin-bottom: 1.5rem;
 }
-
 article {
-  outline: 1px solid red;
   margin: 3rem 1.5rem;
 }
-
 h1, h2, h3, th {
   font-family: 'Fira Mono';
   font-weight: bold;
 }
-
 h2 {
+  background-image: linear-gradient(currentColor 1px, transparent 1px);
+  background-size: 2px 1px;
+  background-repeat: repeat-x;
+  background-position: bottom left;
   font-size: 1.5rem;
   line-height: 1;
   margin-bottom: 1.5rem;
-  border-bottom: currentColor 1px solid;
 }
-
 header {
   margin: 1.5rem auto;
   padding: 0 1.5rem;
@@ -54,36 +51,131 @@ header > h1 {
   vertical-align: middle
 }
 
+footer {
+  padding: 0 1.5rem;
+}
+
+small {
+  font-size: .75rem;
+  line-height: 2;
+}
+
+a:link { color: #369; }
+a:visited { color: #936;}
+a:hover { color: #639; }
+a:active { color: #369; }
+
+.changelog {
+  margin-bottom: 1.5rem;
+}
+.changelog > li {
+  display: flex;
+  flex-wrap: wrap;
+}
 .changelog__version,
 .changelog__pubdate {
-    font-family: 'Fira Mono';
+  font-family: 'Fira Mono';
 }
 .changelog__version {
   font-weight: bold;
+  width: 4rem;
+}
+.changelog__pubdate {
+  width: 7rem;
+}
+.changelog__desc {
+  width: 640px;
+  margin-left: 4rem;
+  flex: 1 1 640px;
+}
+@media (min-width: 640px) {
+  .changelog__desc {
+    margin-left: 0;
+    flex: 1;
+  }
 }
 
-.screenshot__image { height: 6rem }
-
-
-.alert {
-	padding: 1.5rem;
-	margin-bottom: 1.5rem;
-	border: 1px solid transparent;
-	border-radius: .25rem;
-	background-color: #d9edf7;
-	border-color: #bcdff1;
-	color: #31708f;
+.screenshot {
+  height: 6rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.screenshot__figure {
+  height: 100%;
+}
+.screenshot__image {
+  display: block;
+  height: 100%;
+}
+.screenshot__caption {
+  display: none;
 }
 
-.alert img {
-  height: 1em;
-}
-.alert a {
-	color: #245269;
+.screenshot.is-lightbox {
+  background-image: linear-gradient(45deg, darkgray 0%, lightgray 50%, darkgray 100%);
+  border-radius: 8px;
 }
 
-.alert__list {
-  margin: 0;
+.is-lightbox .screenshot__figure {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 1;
+}
+
+.is-lightbox .screenshot__image {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.is-lightbox .screenshot__caption {
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+  display: block;
+  padding: .75rem;
+  position: relative;
+  z-index: 2;
+}
+
+.meta {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  background-color: #d9edf7;
+  border-color: #bcdff1;
+  color: #31708f;
+}
+.meta__title {
+  display: flex;
+  align-items: center;
+}
+.meta img {
+  height: 1.5rem;
+  margin-right: 1rem;
+}
+.meta a {
+  color: #245269;
+}
+.meta__content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.meta__data {
+  flex: 1 1 350px;
+  margin-bottom: 1.5rem;
+
+}
+.meta__links {
+  flex: 1 1 350px;
   padding: 0;
   list-style: none;
 }
@@ -97,7 +189,6 @@ header > h1 {
   fill: currentColor;
   vertical-align: text-top;
 }
-
 /* ==========================================
 Single-colored icons can be modified like so:
 .icon-name {
@@ -106,33 +197,72 @@ Single-colored icons can be modified like so:
 }
 ========================================== */
 
-.icon-twitter {
-  width: 0.9287109375em;
-}
-
-.icon-image {
-  width: 1.0712890625em;
-}
-
-.icon-book {
-  width: 0.9306640625em;
-}
-
-.icon-edit {
-  width: 1.0009765625em;
-}
-
-.icon-github-alt {
-  width: 0.9287109375em;
-}
+.icon-twitter     { width: 0.9287109375em; }
+.icon-image       { width: 1.0712890625em; }
+.icon-book        { width: 0.9306640625em; }
+.icon-edit        { width: 1.0009765625em; }
+.icon-github-alt  { width: 0.9287109375em; }
 
 
 /* http://codepo8.github.io/css-fork-on-github-ribbon/ */
-.forkongithub a { background:#000; color:#fff;text-decoration:none;font-family:arial,sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}
-.forkongithub a:hover{background:#c11;color:#fff;}
-.forkongithub a::before, .forkongithub a::after { content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}
-.forkongithub a::after{bottom:1px;top:auto;}
-@media screen and (min-width:800px) {
-  .forkongithub{position:fixed;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;z-index:9999;}
-  .forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}
+.forkongithub {
+  margin: 1.5rem auto;
+  text-align: center;
+}
+.forkongithub a {
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  font-family: arial, sans-serif;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 40px;
+  font-size: 1rem;
+  line-height: 1.5;
+  position: relative;
+  transition: 0.5s;
+}
+.forkongithub a:hover {
+  background: #c11;
+  color: #fff;
+}
+.forkongithub a::before,
+.forkongithub a::after {
+  content: "";
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 0;
+  height: 1px;
+  background: #fff;
+}
+.forkongithub a::after {
+  bottom: 1px;
+  top: auto;
+}
+@media screen and (min-width: 800px) {
+  .forkongithub {
+    position: fixed;
+    display: block;
+    top: 0;
+    right: 0;
+    width: 200px;
+    overflow: hidden;
+    height: 200px;
+    z-index: 1;
+    margin: 0;
+  }
+  .forkongithub a {
+    width: 280px;
+    position: absolute;
+    top: 60px;
+    right: -60px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+  }
 }
