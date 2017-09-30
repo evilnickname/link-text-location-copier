@@ -75,18 +75,15 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
       clickedContext = info.menuItemId.substring(0, info.menuItemId.indexOf('-')),
       clickedItemName = info.menuItemId.substring(info.menuItemId.indexOf('-') + 1);
 
-  link = (info.pageUrl) ? info.pageUrl : '';
-
-  switch(clickedContext) {
-    case 'page':
-      text = tab.title;
-      break;
-    case 'selection':
-      text = info.selectionText;
-      break;
-    default:
-      text = (info.linkText) ? info.linkText : '';
-      break;
+  if (clickedContext === 'link') {
+    link = info.linkUrl;
+    text = info.linkText;
+  } else if (clickedContext === 'page') {
+    link = tab.url;
+    text = tab.title;
+  } else if (clickedContext === 'selection') {
+    link = info.pageUrl;
+    text = info.selectionText;
   }
 
   outputtext = defaults.menuItems[clickedItemName].template;
