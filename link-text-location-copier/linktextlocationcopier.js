@@ -1,47 +1,19 @@
-const defaults = {
-  contexts: {
-    link: {
-      menuItems: ['title', 'separator', 'plain', 'html', 'separator', 'markdown', 'bbcode'],
-      title: browser.i18n.getMessage('copyLinkLocationString')
-    },
-    page: {
-      menuItems: ['plain', 'html', 'separator', 'markdown', 'bbcode'],
-      title: browser.i18n.getMessage('copyPageLocationString')
-    },
-    selection: {
-      menuItems: ['plain', 'html', 'separator', 'markdown', 'bbcode'],
-      title: browser.i18n.getMessage('copySelectionLocationString')
-    }
-  },
-  menuItems: {
-    title: {
-      slug: 'title',
-      title: browser.i18n.getMessage('copyLinkTextString'),
-      template: '%T'
-    },
-    separator: { type: 'separator' },
-    plain: {
-      slug: 'plain',
-      displayName: browser.i18n.getMessage('plainTextString'),
-      template: '%T — %U'
-    },
-    html: {
-      slug: 'html',
-      displayName: 'HTML',
-      template: '<a href="%U">%T</a>'
-    },
-    markdown: {
-      slug: 'markdown',
-      displayName: 'Markdown',
-      template: '[%T](%U)'
-    },
-    bbcode: {
-      slug: 'bbcode',
-      displayName: 'BB Code',
-      template: '[url=%U]%T[/url]'
-    }
+let _settings;
+
+function onError(e) {
+  console.error(e);
+}
+
+function checkStoredSettings(storedSettings) {
+  if (!storedSettings.length) {
+    browser.storage.local.set(defaults);
+    browser.storage.onChanged.addListener(refreshMenu);
+    _settings = defaults;
+  } else {
+    _settings = storedSettings;
   }
-};
+  setupMenus();
+}
 
 function getMenuSettings(item, context) {
   let menuSettings = {};
@@ -55,18 +27,30 @@ function getMenuSettings(item, context) {
     menuSettings.title = item.title.trim();
   }
   if (item.displayName) {
-    menuSettings.title = `${defaults.contexts[context].title.trim()} ${item.displayName}`;
+    menuSettings.title = `${_settings.contexts[context].title.trim()} ${item.displayName}`;
   }
   menuSettings.contexts = [context];
 
   return menuSettings;
 }
 
-for (let context in defaults.contexts) {
-  for (let menuItem of defaults.contexts[context].menuItems) {
-    browser.contextMenus.create(getMenuSettings(defaults.menuItems[menuItem], context));
+function refreshMenu(changes, area) {
+  _settings.contexts = changes.contexts.newValue;
+  browser.contextMenus.removeAll();
+  setupMenus();
+}
+
+function setupMenus() {
+  for (let context in _settings.contexts) {
+    if (!_settings.contexts[context].enabled) return;
+    for (let menuItem of _settings.contexts[context].menuItems) {
+      browser.contextMenus.create(getMenuSettings(_settings.menuItems[menuItem], context));
+    }
   }
 }
+
+const gettingStoredSettings = browser.storage.local.get();
+gettingStoredSettings.then(checkStoredSettings, onError);
 
 browser.contextMenus.onClicked.addListener(function(info, tab) {
   let text,
@@ -86,7 +70,7 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
     text = info.selectionText;
   }
 
-  outputtext = defaults.menuItems[clickedItemName].template;
+  outputtext = _settings.menuItems[clickedItemName].template;
   outputtext = outputtext.replace(/%T/, text);
   outputtext = outputtext.replace(/%U/, link);
 
