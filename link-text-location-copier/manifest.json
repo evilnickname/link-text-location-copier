@@ -15,7 +15,7 @@
 
     "options_ui": {
       "page": "options/index.html",
-      "browser_style": false
+      "browser_style": true
     },
 
     "icons": {

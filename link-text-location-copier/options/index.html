@@ -3,30 +3,92 @@
   <head>
     <meta charset="utf-8" />
     <title>Link Text and Location Copier settings</title>
-    <link rel="stylesheet" src="options.css" />
+    <style>
+    .format > td {
+      border: 1px solid #999;
+      padding. 2px;
+    }
+    .modal::backdrop {
+      background: rgba(255,0,0,.25);
+    }
+    .buttons {
+      display: flex;
+    }
+    .buttons > button:first-child {
+      margin-right: auto;
+    }
+    </style>
   </head>
 
   <body>
     <h1>Settings</h1>
     <form>
-      <div class="checkboxItem">
+      <div class="checkboxItem browser-style">
         <input type="checkbox" id="showmenu-link" data-showmenu="link"/>
         <label for="showmenu-link">Show 'Copy link text and location as' menu items</label>
       </div>
 
-      <div class="checkboxItem">
+      <div class="checkboxItem browser-style">
         <input type="checkbox" id="showmenu-page" data-showmenu="page"/>
         <label for="showmenu-page">Show 'Copy page title and location as' menu items</label>
       </div>
 
-      <div class="checkboxItem">
+      <div class="checkboxItem browser-style">
         <input type="checkbox" id="showmenu-selection" data-showmenu="selection"/>
         <label for="showmenu-selection">Show 'Copy text selection and location as' menu items</label>
       </div>
 
-      <button type="button" id="reset">Reset defaults</button>
-      <button class="default" type="button" id="save">Save settings</button>
+      <hr />
+
+      <h2>Custom formats</h2>
+      <table id="formats" class="formats">
+        <thead>
+          <tr>
+            <th scope="col">Menu label</th>
+            <th scope="col">Format</th>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <button class="browser-style" type="button" id="addCustomFormat">Add</button>
+
+      <hr />
+      <div class="buttons">
+        <button class="browser-style" type="button" id="reset">Reset defaults</button>
+        <button class="browser-style" type="button" id="save">Save settings</button>
+      </div>
     </form>
+
+    <template id="formatrow">
+      <tr class="format" data-menuitem="">
+        <td class="format__displayname"></td>
+        <td class="format__formatstring"></td>
+        <td>
+          <button class="browser-style" type="button" data-menuitem="" data-action="edit">edit</button>
+          <button class="browser-style" type="button" data-menuitem="" data-action="remove">remove</button>
+        </td>
+      </tr>
+    </template>
+
+    <dialog class="modal" id="formatDialog">
+      <form method="dialog">
+        <div class="browser-style">
+          <label for="add-format-displayname">Menu label</label>
+          <input type="text" id="add-format-displayname" />
+        </div>
+        <div class="browser-style">
+          <label for="add-format-template">Format</label>
+          <input type="text" id="add-format-template" />
+        </div>
+        <div class="buttons">
+          <button class="browser-style" type="button" data-action="cancel">cancel</button>
+          <button class="browser-style" type="button" data-action="save">save</button>
+        </div>
+      </form>
+    </dialog>
+
     <script src="../defaults.js"></script>
     <script src="options.js"></script>
   </body>
