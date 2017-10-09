@@ -1,47 +1,50 @@
 const defaults = {
-  contexts: {
-    link: {
-      enabled: true,
-      menuItems: ['title', 'separator', 'plain', 'html', 'separator', 'markdown', 'bbcode'],
-      title: browser.i18n.getMessage('copyLinkLocationString')
-    },
-    page: {
-      enabled: true,
-      menuItems: ['plain', 'html', 'separator', 'markdown', 'bbcode'],
-      title: browser.i18n.getMessage('copyPageLocationString')
-    },
-    selection: {
-      enabled: false,
-      menuItems: ['plain', 'html', 'separator', 'markdown', 'bbcode'],
-      title: browser.i18n.getMessage('copySelectionLocationString')
-    }
+  contexts: ['link', 'page', 'selection'],
+  strings: {
+    link: browser.i18n.getMessage('copyLinkLocationString'),
+    page: browser.i18n.getMessage('copyPageLocationString'),
+    selection: browser.i18n.getMessage('copySelectionLocationString')
   },
-  menuItems: {
-    title: {
+  menuItems: [
+    {
       slug: 'title',
+      displayName: 'link text',
       title: browser.i18n.getMessage('copyLinkTextString'),
-      template: '%T'
+      template: '%T',
+      contexts: ['link']
     },
-    separator: { type: 'separator' },
-    plain: {
+    {
+      type: 'separator',
+      contexts: ['link']
+    },
+    {
       slug: 'plain',
       displayName: browser.i18n.getMessage('plainTextString'),
-      template: '%T — %U'
+      template: '%T — %U',
+      contexts: ['link', 'page', 'selection']
     },
-    html: {
+    {
       slug: 'html',
       displayName: 'HTML',
-      template: '<a href="%U">%T</a>'
+      template: '<a href="%U">%T</a>',
+      contexts: ['link', 'page', 'selection']
     },
-    markdown: {
+    {
+      type: 'separator',
+      contexts: ['link', 'page', 'selection']
+    },
+    {
       slug: 'markdown',
       displayName: 'Markdown',
-      template: '[%T](%U)'
+      template: '[%T](%U)',
+      contexts: ['link', 'page', 'selection']
     },
-    bbcode: {
+    {
       slug: 'bbcode',
       displayName: 'BB Code',
-      template: '[url=%U]%T[/url]'
+      template: '[url=%U]%T[/url]',
+      contexts: ['link', 'page', 'selection']
     }
-  }
+  ],
+  customMenuItems: 0
 };

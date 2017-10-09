@@ -7,12 +7,12 @@ function onError(e) {
 function checkStoredSettings(storedSettings) {
   if (!storedSettings.length) {
     browser.storage.local.set(defaults);
-    browser.storage.onChanged.addListener(refreshMenu);
     _settings = defaults;
   } else {
     _settings = storedSettings;
   }
   setupMenus();
+  browser.storage.onChanged.addListener(refreshMenu);
 }
 
 function getMenuSettings(item, context) {
@@ -25,9 +25,8 @@ function getMenuSettings(item, context) {
   }
   if (item.title) {
     menuSettings.title = item.title.trim();
-  }
-  if (item.displayName) {
-    menuSettings.title = `${_settings.contexts[context].title.trim()} ${item.displayName}`;
+  } else if (item.displayName) {
+    menuSettings.title = `${_settings.strings[context].trim()} ${item.displayName}`;
   }
   menuSettings.contexts = [context];
 
@@ -35,16 +34,15 @@ function getMenuSettings(item, context) {
 }
 
 function refreshMenu(changes, area) {
-  _settings.contexts = changes.contexts.newValue;
+  _settings.menuItems = changes.menuItems.newValue;
   browser.contextMenus.removeAll();
   setupMenus();
 }
 
 function setupMenus() {
-  for (let context in _settings.contexts) {
-    if (!_settings.contexts[context].enabled) return;
-    for (let menuItem of _settings.contexts[context].menuItems) {
-      browser.contextMenus.create(getMenuSettings(_settings.menuItems[menuItem], context));
+  for (let menuItem of _settings.menuItems) {
+    for (let context of menuItem.contexts) {
+      browser.contextMenus.create(getMenuSettings(menuItem, context));
     }
   }
 }
@@ -57,7 +55,10 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
       link,
       outputtext,
       clickedContext = info.menuItemId.substring(0, info.menuItemId.indexOf('-')),
-      clickedItemName = info.menuItemId.substring(info.menuItemId.indexOf('-') + 1);
+      clickedItemName = info.menuItemId.substring(info.menuItemId.indexOf('-') + 1),
+      clickedItem = _settings.menuItems.filter(function( obj ) {
+        return obj.slug === clickedItemName;
+      });
 
   if (clickedContext === 'link') {
     link = info.linkUrl;
@@ -70,7 +71,7 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
     text = info.selectionText;
   }
 
-  outputtext = _settings.menuItems[clickedItemName].template;
+  outputtext = clickedItem[0].template;
   outputtext = outputtext.replace(/%T/, text);
   outputtext = outputtext.replace(/%U/, link);
 
