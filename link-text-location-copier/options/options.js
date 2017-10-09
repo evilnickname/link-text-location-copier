@@ -1,5 +1,5 @@
 let _settings,
-    $modal = document.getElementById('formatDialog');
+    _$modal = document.getElementById('formatDialog');
 
 function logError(error) {
   console.log(error);
@@ -11,67 +11,120 @@ function setDefaults() {
 }
 
 function saveOptions(e) {
-  document.querySelectorAll('input[data-showmenu]').forEach(function (elem) {
-    var _context = elem.getAttribute('data-showmenu');
-    _settings.contexts[_context].enabled = elem.checked;
-  })
+  document.querySelectorAll('tr.format').forEach(function (elem) {
+    let activeContexts = [];
+    elem.querySelectorAll('input[data-context]').forEach(function (elem) {
+      if (elem.checked) activeContexts.push(elem.dataset.context);
+    });
+    _settings.menuItems[elem.dataset.n].contexts = activeContexts;
+  });
+
   let savingOptions = browser.storage.local.set(_settings);
   savingOptions.then(null, logError);
   e.preventDefault();
 }
 
 function buildCustomFormatTable() {
-  console.log('ohai')
-  let _buffer = document.createDocumentFragment();
-  let _rowTemplate = document.getElementById('formatrow');
-  let _templateTD = _rowTemplate.content.querySelectorAll('td');
+  let _buffer = document.createDocumentFragment(),
+      _$tbody = document.querySelector('#formats > tbody'),
+      _n = 0;
 
-  for (slug in _settings.menuItems) {
-    let menuItem = _settings.menuItems[slug];
-    console.log(menuItem)
-    if (menuItem.displayName && menuItem.template) {
+  for (let menuItem of _settings.menuItems) {
+    let _rowTemplate = document.getElementById('formatrow').content,
+        _templateTD = _rowTemplate.querySelectorAll('td'),
+        _separatorTemplate = document.getElementById('separator').content;
+
+//    console.log(_n, menuItem)
+
+    if (menuItem.type && menuItem.type === 'separator') {
+      _separatorTemplate.querySelector('tr').setAttribute('data-n', _n);
+      for (let context of _settings.contexts) {
+        _separatorTemplate.querySelector(`[data-context=${context}]`).checked = (menuItem.contexts.indexOf(context) > -1) ? true : false;
+      }
+      _buffer.appendChild(document.importNode(_separatorTemplate, true));
+    } else if (menuItem.displayName && menuItem.template) {
       _templateTD[0].textContent = menuItem.displayName;
       _templateTD[1].textContent = menuItem.template;
 
-      _rowTemplate.content.querySelectorAll('[data-menuitem]').forEach(function(elem) {
-        elem.dataset.menuitem = slug;
-      });
+      for (let context of _settings.contexts) {
+        _rowTemplate.querySelector(`[data-context=${context}]`).checked = (menuItem.contexts.indexOf(context) > -1) ? true : false;
+      }
 
-      _buffer.appendChild(document.importNode(_rowTemplate.content, true));
+      _rowTemplate.querySelector('tr').setAttribute('data-n', _n);
+      _buffer.appendChild(document.importNode(_rowTemplate, true));
     }
+    _n++;
   }
 
-  document.querySelector('#formats > tbody').innerHTML = '';
-  document.querySelector('#formats > tbody').appendChild(_buffer);
+  _$tbody.innerHTML = '';
+  _$tbody.appendChild(_buffer);
   document.querySelectorAll('#formats button').forEach(function(elem) {
     elem.addEventListener('click', function (e) {
-      let menuitem = e.target.dataset.menuitem,
+      let menuitem = e.target.closest('[data-n]').dataset.n,
             action = e.target.dataset.action;
-      if (action === 'edit') {
-        editFormat(menuitem);
-      } else if (action === 'remove') {
-        removeFormat(menuitem);
+      switch (action) {
+        case 'edit':
+          editFormat(menuitem);
+          break;
+        case 'remove':
+          removeMenuItem(menuitem);
+          break;
+        case 'up':
+          moveMenuItem(menuitem, 'up');
+          break;
+        case 'down':
+          moveMenuItem(menuitem, 'down');
+          break;
       }
     })
   })
 }
 
 function addFormat() {
-  console.log('addformat')
+  let data = {},
+      _$inputName = document.getElementById('format-displayname'),
+      _$inputTemplate = document.getElementById('format-template');
+
+  _$inputName.value = _$inputTemplate.value = '';
+
+  _$modal.querySelector('button[data-action=cancel]').addEventListener('click', closeModal, { once: true });
+  _$modal.querySelector('button[data-action=save]').addEventListener('click', function (evt) {
+    if (!_$inputName.value && !_$inputTemplate.value) return;
+
+    data.displayName = _$inputName.value.trim();
+    data.template = _$inputTemplate.value;
+    data.slug = 'custom' + _settings.customMenuItems;
+    data.contexts = ['link', 'page', 'selection'];
+
+    _settings.customMenuItems += 1;
+    _settings.menuItems.push(data);
+
+    buildCustomFormatTable();
+    closeModal();
+   }, { once: true });
+
+  showModal();
+}
+
+function addSeparator() {
+  _settings.menuItems.push({ type: 'separator', contexts: ['link', 'page', 'selection'] });
+  buildCustomFormatTable();
 }
 
 function editFormat(menuItemToEdit) {
-  console.log('edit', menuItemToEdit)
   let data = _settings.menuItems[menuItemToEdit],
-      $inputName = document.getElementById('add-format-displayname'),
-      $inputTemplate = document.getElementById('add-format-template');
+      _$inputName = document.getElementById('format-displayname'),
+      _$inputTemplate = document.getElementById('format-template');
 
-  $modal.querySelector('button[data-action=cancel]').addEventListener('click', closeModal, { once: true });
-  $modal.querySelector('button[data-action=save]').addEventListener('click', function (evt) {
-    if ($inputName.value) { data.displayName = $inputName.value.trim() }
-    if ($inputTemplate.value) { data.template = $inputTemplate.value }
+  _$modal.querySelector('button[data-action=cancel]').addEventListener('click', closeModal, { once: true });
+  _$modal.querySelector('button[data-action=save]').addEventListener('click', function (evt) {
+    if (!_$inputName.value && !_$inputTemplate.value) return;
+
+    data.displayName = _$inputName.value.trim();
+    data.template = _$inputTemplate.value;
+
     _settings.menuItems[menuItemToEdit] = data;
-    console.log(_settings.menuItems)
+
     buildCustomFormatTable();
     closeModal();
    }, { once: true });
@@ -82,17 +135,38 @@ function editFormat(menuItemToEdit) {
   showModal();
 }
 
-function removeFormat(e) {
-  console.log('remove', e)
-
+function removeMenuItem(itemIndex) {
+  _settings.menuItems.splice(itemIndex, 1);
+  buildCustomFormatTable();
 }
 
+function moveMenuItem(itemIndex, direction) {
+  let _toMove = parseInt(itemIndex, 10),
+      _moveTo = (direction === 'up') ? _toMove - 1 : _toMove + 1;
+      _moved = _settings.menuItems.move(_toMove, _moveTo);
+  _settings.menuItems = _moved;
+  buildCustomFormatTable();
+}
+
+Array.prototype.move = function (old_index, new_index) {
+  console.log('move', this, old_index, new_index)
+  /*https://stackoverflow.com/questions/5306680/move-an-array-element-from-one-array-position-to-another/5306832#5306832*/
+  if (new_index >= this.length) {
+    var k = new_index - this.length;
+    while ((k--) + 1) {
+      this.push(undefined);
+    }
+  }
+  this.splice(new_index, 0, this.splice(old_index, 1)[0]);
+  return this;
+};
+
 function showModal() {
-  $modal.setAttribute('open', true);
+  _$modal.setAttribute('open', true);
 }
 
 function closeModal() {
-  $modal.removeAttribute('open');
+  _$modal.removeAttribute('open');
 }
 
 function restoreOptions() {
@@ -105,21 +179,17 @@ function restoreOptions() {
       _settings = res;
     }
 
-    for (context in _settings.contexts) {
-      if (_settings.contexts[context].enabled) {
-        document.getElementById(`showmenu-${context}`).checked = true;
-      }
-    }
-
     buildCustomFormatTable();
   });
 }
 
 function resetOptions() {
   let clearStorage = browser.storage.local.clear();
+  restoreOptions();
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
 document.getElementById('reset').addEventListener('click', resetOptions);
 document.getElementById('save').addEventListener('click', saveOptions);
 document.getElementById('addCustomFormat').addEventListener('click', addFormat);
+document.getElementById('addSeparator').addEventListener('click', addSeparator);
