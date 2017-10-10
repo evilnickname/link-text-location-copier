@@ -129,8 +129,8 @@ function editFormat(menuItemToEdit) {
     closeModal();
    }, { once: true });
 
-  $inputName.value = data.displayName;
-  $inputTemplate.value = data.template;
+  _$inputName.value = data.displayName;
+  _$inputTemplate.value = data.template;
 
   showModal();
 }

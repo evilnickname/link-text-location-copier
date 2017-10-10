@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Link Text and Location Copier",
     "description": "__MSG_extensionDescription__",
-    "version": "1.4.0-beta1",
+    "version": "1.4.0beta2",
     "homepage_url": "https://github.com/evilnickname/link-text-location-copier",
     "default_locale": "en",
 
@@ -19,8 +19,8 @@
     },
 
     "icons": {
-      "48": "/icons/paint-brush.svg",
-      "96": "/icons/paint-brush.svg"
+      "48": "paint-brush.svg",
+      "96": "paint-brush.svg"
     },
 
     "permissions": [
