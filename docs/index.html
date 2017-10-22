@@ -6,7 +6,7 @@
     <title>Link Text and Location Copier</title>
     <link rel="icon" href="images/paint-brush.svg" sizes="any" type="image/svg+xml" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Fira+Mono:400,700/Fira+Sans:400,700" />
+    <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Fira+Mono:400,700/Fira+Sans:400, 400i,700" />
   </head>
   <body>
     <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -53,11 +53,11 @@
         <div class="meta">
           <h3 class="meta__title">
             <img src="images/paint-brush.svg" alt="" />
-            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.3.1</a>
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.4.0</a>
           </h3>
           <div class="meta__content">
             <ul class="meta__data">
-              <li>Released on September 27th, 2017</li>
+              <li>Released on October 23rd, 2017</li>
               <li><strong>Requires:</strong> Firefox 56+</li>
             </ul>
 
@@ -66,10 +66,10 @@
                 <svg class="icon icon-image"><use xlink:href="#icon-image"></use></svg>
                 <a href="#screenshots">View screenshots</a>
               </li>
-              <!--li>
+              <li>
                 <svg class="icon icon-book"><use xlink:href="#icon-book"></use></svg>
-                <a href="#docs">Documentation</a>
-              </li-->
+                <a href="#docs">Custom Format Documentation</a>
+              </li>
               <li>
                 <svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg>
                 <a href="#changelog">Changelog</a>
@@ -97,9 +97,16 @@
           <li><del>Add fancy icon</del></li>
           <li><del>Add more 'copy as' formats (Markdown, BBCode, what-have-you)</del></li>
           <li><del>Internationalization</del></li>
+          <li><del>Come up with better name and/or icon</del></li>
+          <li><del>Make configurable/Customalization</del>
+            <ul>
+              <li>Toggle local/synced storage</li>
+              <li>Make options page prettier</li>
+              <li>Further enhancements TBA</li>
+            </ul>
+          </li>
+          <li>Feature Request: Add support for Rich Text format</li>
           <li>Add support for copying (linked) images</li>
-          <li>Make configurable/Customalization</li>
-          <li>Come up with better name <del>and/or icon</del></li>
           <li>Make extension work in Chrome/Opera/Edge</li>
         </ul>
       </article>
@@ -119,6 +126,7 @@
       <article id="changelog">
         <h2><svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg> Changelog</h2>
         <ul class="changelog">
+          <li><span class="changelog__version">1.4.0</span><time class="changelog__pubdate">2017-10-23</time><span class="changelog__desc">Added support for custom formats. Add, remove and/or reorder formats from the options page. Changed icon.</span></li>
           <li><span class="changelog__version">1.3.1</span><time class="changelog__pubdate">2017-09-27</time><span class="changelog__desc">Fixed a bug where “copy link text and location as …” copied the page location instead of link location.</span></li>
           <li><span class="changelog__version">1.3.0</span><time class="changelog__pubdate">2017-09-21</time><span class="changelog__desc">Adds support for copying selected text and page title.</span></li>
           <li><span class="changelog__version">1.2.0</span><time class="changelog__pubdate">2017-09-18</time><span class="changelog__desc">Internationalization. Added Dutch and German translations.</span></li>
@@ -130,8 +138,10 @@
         <p>Note: Not all old versions are available on <abbr title="Addons.Mozilla.Org">AMO</abbr>. Versions with stupid bugs are disabled.</p>
       </article>
 
-      <!--article id="docs">
-        <h2><svg class="icon icon-book"><use xlink:href="#icon-book"></use></svg> Documentation</h2>
+      <article id="docs">
+        <h2><svg class="icon icon-book"><use xlink:href="#icon-book"></use></svg> Custom Format Documentation</h2>
+
+        <p>Easy as pie: with the variables listed below, create whatever format you need.</p>
         <table>
           <caption>Custom format variables</caption>
           <thead>
@@ -160,14 +170,14 @@
         <ol>
           <li id="n1">Including alt-attribute</li>
         </ol>
-      </article-->
+      </article>
 
       <article>
         <h2>Credits / Acknowledgements</h2>
         <ul>
           <li>Totally inspired by/based on Jonah Bishop’s <a href="https://www.borngeek.com/firefox/colt/">CoLT</a>. (<a href="https://github.com/jgbishop/colt/blob/master/LICENSE.txt">license</a>)</li>
           <li>The Copy-to-clipboard functionality is lifted from Firefox’s <a href="https://github.com/mdn/webextensions-examples/tree/master/context-menu-copy-link-with-types">context-menu-copy-link-with-types</a> example. (<a href="https://github.com/mdn/webextensions-examples/blob/master/LICENSE">license</a>)</li>
-          <li><a href="https://www.flaticon.com/free-icon/paint-brush_178388">Icon</a> made by <a href="https://flat-icons.com/">Flat Icons</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC 3.0 BY</a></li>
+          <li><a href="https://www.flaticon.com/free-icon/paint-brush_178388">Paint Brush Icon</a> made by <a href="https://flat-icons.com/">Flat Icons</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC 3.0 BY</a></li>
         </ul>
       </article>
 
@@ -178,7 +188,7 @@
           <li>
             <svg class="icon icon-github-alt"><use xlink:href="#icon-github-alt"></use></svg> <a href="https://github.com/evilnickname/link-text-location-copier/issues">GitHub</a>
           </li>
-          <li><svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg> @<a href="https://twitter.com/evilnickname">evilnickname</a></li>
+          <li><svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg> <a href="https://twitter.com/evilnickname">@evilnickname</a></li>
           <li><svg class="icon icon-envelope"><use xlink:href="#icon-envelope"></use></svg> <a href="#">E-mail</a><span class="emaillink" hidden>moc&#x002E;liamg&#x0040;reipoc-noitacol-txet-knil+eman<span class="i">null</span>kcinlive</span></li>
         </ul>
       </article>

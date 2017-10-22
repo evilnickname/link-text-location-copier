@@ -7,6 +7,7 @@
 html {
   font: 20px/1.5 'Fira Sans';
   background-color: #f9f9f9;
+  counter-reset: tables;
 /*
   background-image: linear-gradient(#eee 1px, transparent 1px);
   background-size: 100% 1.5rem;
@@ -34,6 +35,10 @@ h2 {
   font-size: 1.5rem;
   line-height: 1;
   margin-bottom: 1.5rem;
+}
+
+ul ul {
+  margin-left: 1.5rem;
 }
 header {
   margin: 1.5rem auto;
@@ -64,6 +69,38 @@ a:link { color: #369; }
 a:visited { color: #936;}
 a:hover { color: #639; }
 a:active { color: #369; }
+
+table {
+  border-collapse: collapse;
+  caption-side: bottom;
+  table-layout: fixed;
+  margin-bottom: 1.5rem;
+  counter-increment: tables;
+
+  /* Bootstrap 4 responsive table */
+  display:block;
+  width:100%;
+  overflow-x:auto;
+  -ms-overflow-style:-ms-autohiding-scrollbar
+}
+
+table > thead th {
+  border-bottom: 1px solid currentColor;
+}
+
+table > tbody tr {
+  border-bottom: 1px solid currentColor;
+}
+
+table > tbody td {
+  padding: .75rem 1.5rem calc(.75rem - 1px);
+}
+
+table > caption::before {
+  content: 'table ' counter(tables) ': ';
+  font-style: italic;
+  text-align: left;
+}
 
 .changelog {
   margin-bottom: 1.5rem;
