@@ -7,10 +7,14 @@ Heavily inspired by the [CoLT](https://github.com/jgbishop/colt) add-on, using c
 
 [Icon](https://www.flaticon.com/free-icon/paint-brush_178388) made by [Flat Icons](https://flat-icons.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
 
-## Possible TODOs
+## Roadmap
 * ~~Add fancy icon~~
 * ~~Add more 'copy as' formats (Markdown, BBCode, what-have-you)~~
+* ~~Come up with better icon~~
+* ~~Make configurable/Customization~~
+    * Toggle local/synced storage
+    * Make options page prettier
+* Add documentation
 * Copy actions for (linked) images
-* Make configurable/Customalization
-* Come up with better name ~~and/or icon~~
+* Requested: Rich Text format
 * Make extension work in Chrome/Opera/Edge
