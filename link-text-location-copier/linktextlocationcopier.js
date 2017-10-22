@@ -1,42 +1,18 @@
-const defaults = {
-  link: {
-    menuItems: ['title', 'separator', 'plain', 'html', 'separator', 'markdown', 'bbcode'],
-    title: browser.i18n.getMessage('copyLinkLocationString')
-  },
-  page: {
-    menuItems: ['plain', 'html', 'separator', 'markdown', 'bbcode'],
-    title: browser.i18n.getMessage('copyPageLocationString')
-  }
-};
+let _addonSettings;
 
-const menuItems = {
-  title: {
-    slug: 'title',
-    title: browser.i18n.getMessage('copyLinkTextString'),
-    template: '%T'
-  },
-  separator: { type: 'separator' },
-  plain: {
-    slug: 'plain',
-    displayName: browser.i18n.getMessage('plainTextString'),
-    template: '%T — %U'
-  },
-  html: {
-    slug: 'html',
-    displayName: 'HTML',
-    template: '<a href="%U">%T</a>'
-  },
-  markdown: {
-    slug: 'markdown',
-    displayName: 'Markdown',
-    template: '[%T](%U)'
-  },
-  bbcode: {
-    slug: 'bbcode',
-    displayName: 'BB Code',
-    template: '[url=%U]%T[/url]'
+function onError(e) {
+  console.error(e);
+}
+
+function checkStoredSettings(storedSettings) {
+  if (!storedSettings.context && !storedSettings.menuItems) {
+    _addonSettings = defaults;
+  } else {
+    _addonSettings = storedSettings;
   }
-};
+  setupMenus();
+  browser.storage.onChanged.addListener(refreshMenu);
+}
 
 function getMenuSettings(item, context) {
   let menuSettings = {};
@@ -48,47 +24,53 @@ function getMenuSettings(item, context) {
   }
   if (item.title) {
     menuSettings.title = item.title.trim();
-  }
-  if (item.displayName) {
-    menuSettings.title = `${defaults[context].title.trim()} ${item.displayName}`;
+  } else if (item.displayName) {
+    menuSettings.title = `${_addonSettings.strings[context].trim()} ${item.displayName}`;
   }
   menuSettings.contexts = [context];
 
   return menuSettings;
 }
 
-for (item of defaults.link.menuItems) {
-  browser.contextMenus.create(getMenuSettings(menuItems[item], 'link'));
+function refreshMenu(changes, area) {
+  _addonSettings.menuItems = changes.menuItems.newValue;
+  browser.contextMenus.removeAll();
+  setupMenus();
 }
 
-for (item of defaults.page.menuItems) {
-  browser.contextMenus.create(getMenuSettings(menuItems[item], 'page'));
+function setupMenus() {
+  for (let menuItem of _addonSettings.menuItems) {
+    for (let context of menuItem.contexts) {
+      browser.contextMenus.create(getMenuSettings(menuItem, context));
+    }
+  }
 }
+
+const gettingStoredSettings = browser.storage.local.get();
+gettingStoredSettings.then(checkStoredSettings, onError);
 
 browser.contextMenus.onClicked.addListener(function(info, tab) {
-  let title,
+  let text,
       link,
       outputtext,
       clickedContext = info.menuItemId.substring(0, info.menuItemId.indexOf('-')),
-      clickedItemName = info.menuItemId.substring(info.menuItemId.indexOf('-') + 1);
+      clickedItemName = info.menuItemId.substring(info.menuItemId.indexOf('-') + 1),
+      clickedItem = _addonSettings.menuItems.filter(function( obj ) {
+        return obj.slug === clickedItemName;
+      });
 
-  console.log(info)
-
-  link = (info.pageUrl) ? info.pageUrl : '';
-
-  switch(clickedContext) {
-    case 'page':
-      text = tab.title;
-      break;
-    case 'selection':
-      text = info.selectionText;
-      break;
-    default:
-      text = (info.linkText) ? info.linkText : '';
-      break;
+  if (clickedContext === 'link') {
+    link = info.linkUrl;
+    text = info.linkText;
+  } else if (clickedContext === 'page') {
+    link = tab.url;
+    text = tab.title;
+  } else if (clickedContext === 'selection') {
+    link = info.pageUrl;
+    text = info.selectionText;
   }
 
-  outputtext = menuItems[clickedItemName].template;
+  outputtext = clickedItem[0].template;
   outputtext = outputtext.replace(/%T/, text);
   outputtext = outputtext.replace(/%U/, link);
 
