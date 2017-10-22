@@ -1,16 +1,28 @@
 let _settings,
     _$modal = document.getElementById('formatDialog');
 
+/*
+On startup, check whether we have stored settings.
+If we don't, then store the default settings.
+*/
+function checkStoredSettings(storedSettings) {
+  if (!storedSettings.context && !storedSettings.menuItems) {
+    browser.storage.local.set(defaults);
+    _settings = defaults;
+  } else {
+    _settings = storedSettings;
+  }
+  buildCustomFormatTable();
+}
+
+const gettingStoredSettings = browser.storage.local.get();
+gettingStoredSettings.then(checkStoredSettings, logError);
+
 function logError(error) {
-  console.log(error);
+  console.error(error);
 }
 
-function setDefaults() {
-  let settingDefaults = browser.storage.local.set(defaults);
-  settingDefaults.then(null, logError);
-}
-
-function saveOptions(e) {
+function saveOptions(event) {
   document.querySelectorAll('tr.format').forEach(function (elem) {
     let activeContexts = [];
     elem.querySelectorAll('input[data-context]').forEach(function (elem) {
@@ -20,8 +32,7 @@ function saveOptions(e) {
   });
 
   let savingOptions = browser.storage.local.set(_settings);
-  savingOptions.then(null, logError);
-  e.preventDefault();
+  event.preventDefault();
 }
 
 function buildCustomFormatTable() {
@@ -33,8 +44,6 @@ function buildCustomFormatTable() {
     let _rowTemplate = document.getElementById('formatrow').content,
         _templateTD = _rowTemplate.querySelectorAll('td'),
         _separatorTemplate = document.getElementById('separator').content;
-
-//    console.log(_n, menuItem)
 
     if (menuItem.type && menuItem.type === 'separator') {
       _separatorTemplate.querySelector('tr').setAttribute('data-n', _n);
@@ -149,7 +158,6 @@ function moveMenuItem(itemIndex, direction) {
 }
 
 Array.prototype.move = function (old_index, new_index) {
-  console.log('move', this, old_index, new_index)
   /*https://stackoverflow.com/questions/5306680/move-an-array-element-from-one-array-position-to-another/5306832#5306832*/
   if (new_index >= this.length) {
     var k = new_index - this.length;
@@ -169,26 +177,13 @@ function closeModal() {
   _$modal.removeAttribute('open');
 }
 
-function restoreOptions() {
-  let gettingItem = browser.storage.local.get();
-  gettingItem.then((res) => {
-    if (!res.contexts && !res.menuItems) {
-      setDefaults();
-      _settings = defaults;
-    } else {
-      _settings = res;
-    }
 
-    buildCustomFormatTable();
-  });
-}
 
 function resetOptions() {
   let clearStorage = browser.storage.local.clear();
   restoreOptions();
 }
 
-document.addEventListener('DOMContentLoaded', restoreOptions);
 document.getElementById('reset').addEventListener('click', resetOptions);
 document.getElementById('save').addEventListener('click', saveOptions);
 document.getElementById('addCustomFormat').addEventListener('click', addFormat);

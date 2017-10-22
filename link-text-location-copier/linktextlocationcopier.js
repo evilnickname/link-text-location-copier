@@ -1,15 +1,14 @@
-let _settings;
+let _addonSettings;
 
 function onError(e) {
   console.error(e);
 }
 
 function checkStoredSettings(storedSettings) {
-  if (!storedSettings.length) {
-    browser.storage.local.set(defaults);
-    _settings = defaults;
+  if (!storedSettings.context && !storedSettings.menuItems) {
+    _addonSettings = defaults;
   } else {
-    _settings = storedSettings;
+    _addonSettings = storedSettings;
   }
   setupMenus();
   browser.storage.onChanged.addListener(refreshMenu);
@@ -26,7 +25,7 @@ function getMenuSettings(item, context) {
   if (item.title) {
     menuSettings.title = item.title.trim();
   } else if (item.displayName) {
-    menuSettings.title = `${_settings.strings[context].trim()} ${item.displayName}`;
+    menuSettings.title = `${_addonSettings.strings[context].trim()} ${item.displayName}`;
   }
   menuSettings.contexts = [context];
 
@@ -34,13 +33,13 @@ function getMenuSettings(item, context) {
 }
 
 function refreshMenu(changes, area) {
-  _settings.menuItems = changes.menuItems.newValue;
+  _addonSettings.menuItems = changes.menuItems.newValue;
   browser.contextMenus.removeAll();
   setupMenus();
 }
 
 function setupMenus() {
-  for (let menuItem of _settings.menuItems) {
+  for (let menuItem of _addonSettings.menuItems) {
     for (let context of menuItem.contexts) {
       browser.contextMenus.create(getMenuSettings(menuItem, context));
     }
@@ -56,7 +55,7 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
       outputtext,
       clickedContext = info.menuItemId.substring(0, info.menuItemId.indexOf('-')),
       clickedItemName = info.menuItemId.substring(info.menuItemId.indexOf('-') + 1),
-      clickedItem = _settings.menuItems.filter(function( obj ) {
+      clickedItem = _addonSettings.menuItems.filter(function( obj ) {
         return obj.slug === clickedItemName;
       });
 
