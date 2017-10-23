@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Link Text and Location Copier test page</title>
+    <link rel="icon" href="link-text-location-copier/icons/paint-brush.svg" sizes="any" type="image/svg+xml">
+  </head>
+  <body>
+    <ul>
+      <li>
+        <a href="https://github.com/evilnickname/link-text-location-copier" title="title attribute">Link to the Link Text and Location Copier homepage<a>
+      </li>
+      <li>
+        <a href="http://example.com/testlink-with-(parentheses)">Link with parentheses</a> (might be troublesome with Markdown)
+      </li>
+      <li>
+        <a href="https://www.flaticon.com/free-icon/paint-brush_178388"><img src="images/paint-brush.png" alt="Addon logo (alt linked image)" /></a> (linked image)
+      </li>
+      <li>
+        <img src="images/paint-brush.png" alt="Addon logo (alt image)" /> (image)
+      </li>
+    </ul>
+    <input type="text" style="width: 100%" id="output" />
+    <script>
+      document.getElementById('output').addEventListener('focus', function() {
+        this.value = null;
+      });
+    </script>
+  </body>
+</html>
