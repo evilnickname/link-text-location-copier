@@ -44,6 +44,18 @@ const defaults = {
       displayName: 'BB Code',
       template: '[url=%U]%T[/url]',
       contexts: ['link', 'page', 'selection']
+    },
+    {
+      type: 'separator',
+      contexts: ['link', 'page']
+    },
+    {
+      slug: 'richtext',
+      displayName: 'Rich Text',
+      template: '<a href="%U">%T</a>',
+      contexts: ['link', 'page'],
+      outputAsHTML: true,
+      locked: true
     }
   ],
   customMenuItems: 0

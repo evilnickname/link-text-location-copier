@@ -15,8 +15,10 @@ function checkStoredSettings(storedSettings) {
   buildCustomFormatTable();
 }
 
-const gettingStoredSettings = browser.storage.local.get();
-gettingStoredSettings.then(checkStoredSettings, logError);
+function init() {
+  const gettingStoredSettings = browser.storage.local.get();
+  gettingStoredSettings.then(checkStoredSettings, logError);
+}
 
 function logError(error) {
   console.error(error);
@@ -58,6 +60,8 @@ function buildCustomFormatTable() {
       for (let context of _settings.contexts) {
         _rowTemplate.querySelector(`[data-context=${context}]`).checked = (menuItem.contexts.indexOf(context) > -1) ? true : false;
       }
+
+      _rowTemplate.querySelector('button[data-action=edit]').hidden = (menuItem.locked) ? true : null;
 
       _rowTemplate.querySelector('tr').setAttribute('data-n', _n);
       _buffer.appendChild(document.importNode(_rowTemplate, true));
@@ -177,14 +181,14 @@ function closeModal() {
   _$modal.removeAttribute('open');
 }
 
-
-
 function resetOptions() {
   let clearStorage = browser.storage.local.clear();
-  restoreOptions();
+  init();
 }
 
 document.getElementById('reset').addEventListener('click', resetOptions);
 document.getElementById('save').addEventListener('click', saveOptions);
 document.getElementById('addCustomFormat').addEventListener('click', addFormat);
 document.getElementById('addSeparator').addEventListener('click', addSeparator);
+
+init();

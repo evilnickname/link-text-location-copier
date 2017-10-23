@@ -8,6 +8,8 @@
     <style>
       * { box-sizing: border-box; }
       li { margin-bottom: 1rem; }
+      textarea { width: 100%; }
+      div[contenteditable] { outline: 1px dotted grey; margin: 1rem 0; min-height: 2rem; }
     </style>
   </head>
   <body>
@@ -25,10 +27,14 @@
         <img src="images/paint-brush.png" alt="Addon logo (alt image)" /> (image)
       </li>
     </ul>
-    <input type="text" style="width: 100%" id="output" />
+    <textarea id="output--text"></textarea>
+    <div id="output--richtext" contentEditable>Test Rich Text by pasting here</div>
     <script>
-      document.getElementById('output').addEventListener('focus', function() {
+      document.getElementById('output--text').addEventListener('focus', function() {
         this.value = null;
+      });
+      document.getElementById('output--richtext').addEventListener('focus', function() {
+        this.innerHTML = null;
       });
     </script>
   </body>

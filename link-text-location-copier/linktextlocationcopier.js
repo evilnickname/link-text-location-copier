@@ -39,11 +39,22 @@ function refreshMenu(changes, area) {
 }
 
 function setupMenus() {
+  if (!_addonSettings.menuItems) return;
   for (let menuItem of _addonSettings.menuItems) {
     for (let context of menuItem.contexts) {
       browser.contextMenus.create(getMenuSettings(menuItem, context));
     }
   }
+}
+
+// https://gist.github.com/Rob--W/ec23b9d6db9e56b7e4563f1544e0d546
+function escapeHTML(str) {
+    // Note: string cast using String; may throw if `str` is non-serializable, e.g. a Symbol.
+    // Most often this is not the case though.
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 const gettingStoredSettings = browser.storage.local.get();
@@ -59,6 +70,8 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
         return obj.slug === clickedItemName;
       });
 
+  clickedItem = clickedItem[0];
+
   if (clickedContext === 'link') {
     link = info.linkUrl;
     text = info.linkText;
@@ -70,11 +83,14 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
     text = info.selectionText;
   }
 
-  outputtext = clickedItem[0].template;
+  // Always HTML-escape external input to avoid XSS
+  if (clickedItem.outputAsHTML) { link = escapeHTML(link) }
+
+  outputtext = clickedItem.template;
   outputtext = outputtext.replace(/%T/, text);
   outputtext = outputtext.replace(/%U/, link);
 
-  const code = 'copyToClipboard(' + JSON.stringify(outputtext) + ');';
+  const code = 'copyToClipboard(' + JSON.stringify(outputtext) + ',' + clickedItem.outputAsHTML +');';
 
   browser.tabs.executeScript({
     code: 'typeof copyToClipboard === "function";',

@@ -1,9 +1,15 @@
-function copyToClipboard(text, html) {
+function copyToClipboard(toBePasted, outputAsHTML) {
   function oncopy(event) {
     document.removeEventListener('copy', oncopy, true);
     event.stopImmediatePropagation();
     event.preventDefault();
-    event.clipboardData.setData('text/plain', text);
+
+    if (outputAsHTML) {
+      event.clipboardData.setData('text/html', toBePasted);
+    }
+    else {
+      event.clipboardData.setData('text/plain', toBePasted);
+    }
   }
   document.addEventListener('copy', oncopy, true);
   document.execCommand('copy');
