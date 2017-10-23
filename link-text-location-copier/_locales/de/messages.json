@@ -9,7 +9,7 @@
   },
   "copySelectionLocationString": {
     "message": "Ausgewählter Text und Seitenadresse kopieren als",
-    "description": "Translation of 'Copy text selection and location as'"
+    "description": "Translation of 'Copy text selection and page location as'"
   },
   "copyLinkTextString": {
     "message": "Link-Text kopieren",

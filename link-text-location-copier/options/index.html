@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Link Text and Location Copier settings</title>
+    <style>
+    form {
+      padding: 4px;
+    }
+    .format > td {
+      border: 1px solid #999;
+      padding: 2px 8px;
+    }
+    td.checkboxItem {
+      padding: 0;
+    }
+    .format label {
+      display: table-cell;
+      text-align: center;
+      padding: 8px;
+      width: 80px;
+    }
+    .format button {
+      margin: 2px;
+    }
+    .format:first-child button[data-action=up],
+    .format:last-child button[data-action=down] {
+      display: none;
+    }
+
+    .format button[data-action=edit],
+    .format:first-child button[data-action=up] {
+      float: left;
+    }
+    .format button[data-action=remove],
+    .format:last-child button[data-action=down] {
+      float: right;
+    }
+
+    .modal::backdrop {
+      background: rgba(255,0,0,.25);
+    }
+    .modal .browser-style {
+      display: flex;
+    }
+    .modal .browser-style label {
+      margin-right: auto;
+      padding-right: 2em;
+    }
+    .modal .format-info {
+      margin: 1em 0;
+    }
+
+    .buttons {
+      display: flex;
+    }
+    .buttons > button:first-child {
+      margin-right: auto;
+    }
+    </style>
+  </head>
+
+  <body>
+    <h1>Settings</h1>
+    <form>
+      <table id="formats" class="formats">
+        <thead>
+          <tr>
+            <th scope="col">Menu label</th>
+            <th scope="col">Format</th>
+            <th scope="col">Link</th>
+            <th scope="col">Page</th>
+            <th scope="col">Selection</th>
+            <th scope="col">Move</th>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <button class="browser-style" type="button" id="addCustomFormat">Add menuitem</button>
+      <button class="browser-style" type="button" id="addSeparator">Add separator</button>
+
+      <hr />
+      <div class="buttons">
+        <button class="browser-style" type="button" id="reset">Reset defaults</button>
+        <button class="browser-style" type="button" id="save">Save settings</button>
+      </div>
+    </form>
+
+    <template id="formatrow">
+      <tr class="format" data-n="">
+        <td class="format__displayname"></td>
+        <td class="format__formatstring"></td>
+        <td class="checkboxItem browser-style">
+          <label><input type="checkbox" data-context="link" /></label>
+        </td>
+        <td class="checkboxItem browser-style">
+          <label><input type="checkbox" data-context="page" /></label>
+        </td>
+        <td class="checkboxItem browser-style">
+          <label><input type="checkbox" data-context="selection" /></label>
+        </td>
+        <td>
+          <button class="browser-style" type="button" data-action="up">▲</button>
+          <button class="browser-style" type="button" data-action="down">▼</button>
+        </td>
+        <td>
+          <button class="browser-style" type="button" data-action="edit">edit</button>
+          <button class="browser-style" type="button" data-action="remove">remove</button>
+        </td>
+      </tr>
+    </template>
+
+    <template id="separator">
+      <tr class="format" data-n="">
+        <td colspan="2"><hr /></td>
+        <td class="checkboxItem browser-style">
+          <label><input type="checkbox" data-context="link" /></label>
+        </td>
+        <td class="checkboxItem browser-style">
+          <label><input type="checkbox" data-context="page" /></label>
+        </td>
+        <td class="checkboxItem browser-style">
+          <label><input type="checkbox" data-context="selection" /></label>
+        </td>
+        <td>
+          <button class="browser-style" type="button" data-action="up">▲</button>
+          <button class="browser-style" type="button" data-action="down">▼</button>
+        </td>
+        <td>
+          <button class="browser-style" type="button" data-action="remove">remove</button>
+        </td>
+      </tr>
+    </template>
+
+    <dialog class="modal" id="formatDialog">
+      <form method="dialog">
+        <div class="browser-style">
+          <label for="format-displayname">Menu label</label>
+          <input type="text" id="format-displayname" />
+        </div>
+        <div class="browser-style">
+          <label for="format-template">Format</label>
+          <input type="text" id="format-template" />
+        </div>
+        <div class="format-info">
+          <b>%T</b> — Link title, page title, or text selection<br />
+          <b>%U</b> — Link location, or page location
+        </div>
+        <div class="buttons">
+          <button class="browser-style" type="button" data-action="cancel">cancel</button>
+          <button class="browser-style" type="button" data-action="save">save</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="../defaults.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>
