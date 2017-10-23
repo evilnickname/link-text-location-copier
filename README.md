@@ -11,18 +11,11 @@ Heavily inspired by the [CoLT](https://github.com/jgbishop/colt) add-on, using c
 * ~~Add fancy icon~~
 * ~~Add more 'copy as' formats (Markdown, BBCode, what-have-you)~~
 * ~~Come up with better icon~~
-<<<<<<< HEAD
 * ~~Add documentation~~
 * ~~Make configurable/Customization~~
     * Toggle local/synced storage
     * Make options page prettier
     * Further enhancements TBA
-=======
-* ~~Make configurable/Customization~~
-    * Toggle local/synced storage
-    * Make options page prettier
-* Add documentation
->>>>>>> master
 * Copy actions for (linked) images
 * Requested: Rich Text format
 * Make extension work in Chrome/Opera/Edge
