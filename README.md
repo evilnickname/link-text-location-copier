@@ -15,6 +15,7 @@ Heavily inspired by the [CoLT](https://github.com/jgbishop/colt) add-on, using c
 * ~~Make configurable/Customization~~
     * Toggle local/synced storage
     * Make options page prettier
+    * Internationalize options page
     * Export/Import settings
     * Further enhancements TBA
 * ~~Requested: Rich Text format~~
