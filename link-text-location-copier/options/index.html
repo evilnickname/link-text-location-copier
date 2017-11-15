@@ -36,6 +36,9 @@
     .format:last-child button[data-action=down] {
       float: right;
     }
+    .format-info b {
+      font-family: monospace;
+    }
 
     .modal::backdrop {
       background: rgba(255,0,0,.25);
@@ -146,7 +149,10 @@
         </div>
         <div class="format-info">
           <b>%T</b> — Link title, page title, or text selection<br />
-          <b>%U</b> — Link location, or page location
+          <b>%U</b> — Link location, or page location<br />
+          <b>%N</b> — Newline character<br />
+          <b>%B</b> — Tab character<br />
+          <b>%L</b> — Localized time stamp
         </div>
         <div class="buttons">
           <button class="browser-style" type="button" data-action="cancel">cancel</button>

@@ -53,11 +53,11 @@
         <div class="meta">
           <h3 class="meta__title">
             <img src="images/paint-brush.svg" alt="" />
-            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.4.1</a>
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.4.2</a>
           </h3>
           <div class="meta__content">
             <ul class="meta__data">
-              <li>Released on October 23rd, 2017</li>
+              <li>Released on November 15th, 2017</li>
               <li><strong>Requires:</strong> Firefox 56+</li>
             </ul>
 
@@ -135,6 +135,7 @@
       <article id="changelog">
         <h2><svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg> Changelog</h2>
         <ul class="changelog">
+          <li><span class="changelog__version">1.4.2</span><time class="changelog__pubdate">2017-11-15</time><span class="changelog__desc">Added support for newline, tab and local time variables in templates. Variables can now be used multiple times in a template.</span></li>
           <li><span class="changelog__version">1.4.1</span><time class="changelog__pubdate">2017-10-23</time><span class="changelog__desc">Added Rich Text support (for copying links to Word/Outlook/etc.).</span></li>
           <li><span class="changelog__version">1.4.0</span><time class="changelog__pubdate">2017-10-23</time><span class="changelog__desc">Added support for custom formats. Add, remove and/or reorder formats from the options page. Changed icon.</span></li>
           <li><span class="changelog__version">1.3.1</span><time class="changelog__pubdate">2017-09-27</time><span class="changelog__desc">Fixed a bug where “copy link text and location as …” copied the page location instead of link location.</span></li>
@@ -175,10 +176,23 @@
               <td>Page URL</td>
               <td>Page URL</td>
             </tr>
+            <tr>
+              <th scope="row">%N</th>
+              <td colspan="3">Newline character <a href="#n2">2</a></td>
+            </tr>
+            <tr>
+              <th scope="row">%B</th>
+              <td colspan="3">Tab character</td>
+            </tr>
+            <tr>
+              <th scope="row">%L</th>
+              <td colspan="3">Localized time stamp</td>
+            </tr>
           </tbody>
         </table>
         <ol>
-          <li id="n1">Including alt-attribute</li>
+          <li id="n1">Including the <code>alt</code> attribute</li>
+          <li id="n2"><code>\n</code>. For HTML, you can insert <code>&lt;br /&gt;</code> into the template.</li>
         </ol>
       </article>
 

@@ -87,8 +87,14 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
   if (clickedItem.outputAsHTML) { link = escapeHTML(link) }
 
   outputtext = clickedItem.template;
-  outputtext = outputtext.replace(/%T/, text);
-  outputtext = outputtext.replace(/%U/, link);
+  outputtext = outputtext.replace(/%T/g, text);
+  outputtext = outputtext.replace(/%U/g, link);
+  outputtext = outputtext.replace(/%N/g, '\n');
+  outputtext = outputtext.replace(/%B/g, '\t');
+  outputtext = outputtext.replace(/%L/g, function() {
+    var _ts = new Date();
+    return _ts.toLocaleString();
+  });
 
   const code = 'copyToClipboard(' + JSON.stringify(outputtext) + ',' + clickedItem.outputAsHTML +');';
 
