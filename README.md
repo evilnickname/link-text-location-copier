@@ -17,6 +17,7 @@ Heavily inspired by the [CoLT](https://github.com/jgbishop/colt) add-on, using c
     * Make options page prettier
     * Internationalize options page
     * Export/Import settings
+    * Conditional logic for templates
     * Further enhancements TBA
 * ~~Requested: Rich Text format~~
 * Copy actions for (linked) images

@@ -89,6 +89,9 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
   outputtext = clickedItem.template;
   outputtext = outputtext.replace(/%T/g, text);
   outputtext = outputtext.replace(/%U/g, link);
+  outputtext = outputtext.replace(/%I/g, function() {
+    return (info.mediaType && info.mediaType === 'image') ? info.srcUrl : '';
+  });
   outputtext = outputtext.replace(/%N/g, '\n');
   outputtext = outputtext.replace(/%B/g, '\t');
   outputtext = outputtext.replace(/%L/g, function() {

@@ -53,11 +53,11 @@
         <div class="meta">
           <h3 class="meta__title">
             <img src="images/paint-brush.svg" alt="" />
-            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.4.2</a>
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.4.3</a>
           </h3>
           <div class="meta__content">
             <ul class="meta__data">
-              <li>Released on November 15th, 2017</li>
+              <li>Released on November 17th, 2017</li>
               <li><strong>Requires:</strong> Firefox 56+</li>
             </ul>
 
@@ -106,6 +106,7 @@
               <li>Make options page prettier</li>
               <li>Internationalize options page</li>
               <li>Import/Export settings</li>
+              <li>Conditional logic for templates</li>
               <li>Further enhancements TBA</li>
             </ul>
           </li>
@@ -136,6 +137,7 @@
       <article id="changelog">
         <h2><svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg> Changelog</h2>
         <ul class="changelog">
+          <li><span class="changelog__version">1.4.3</span><time class="changelog__pubdate">2017-11-17</time><span class="changelog__desc">Provisional support for Image Location added. Only works for linked images, otherwise returns an empty string.</span></li>
           <li><span class="changelog__version">1.4.2</span><time class="changelog__pubdate">2017-11-15</time><span class="changelog__desc">Added support for newline, tab and local time variables in templates. Variables can now be used multiple times in a template.</span></li>
           <li><span class="changelog__version">1.4.1</span><time class="changelog__pubdate">2017-10-23</time><span class="changelog__desc">Added Rich Text support (for copying links to Word/Outlook/etc.).</span></li>
           <li><span class="changelog__version">1.4.0</span><time class="changelog__pubdate">2017-10-23</time><span class="changelog__desc">Added support for custom formats. Add, remove and/or reorder formats from the options page. Changed icon.</span></li>
@@ -162,6 +164,7 @@
               <th scope="col">Link</th>
               <th scope="col">Page</th>
               <th scope="col">Selection</th>
+              <th scope="col">Image inside a link</th>
             </tr>
           </thead>
           <tbody>
@@ -170,29 +173,38 @@
               <td>Link text</td>
               <td>Page title</td>
               <td>Selected text <a href="#n1">1</a></td>
+              <td>All text inside the link <a href="#n1">1</a></td>
             </tr>
             <tr>
               <th scope="row">%U</th>
               <td>Link URL</td>
               <td>Page URL</td>
               <td>Page URL</td>
+              <td>Link URL</td>
+            </tr>
+            <tr>
+              <th scope="row">%I</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Image URL</td>
             </tr>
             <tr>
               <th scope="row">%N</th>
-              <td colspan="3">Newline character <a href="#n2">2</a></td>
+              <td colspan="4">Newline character <a href="#n2">2</a></td>
             </tr>
             <tr>
               <th scope="row">%B</th>
-              <td colspan="3">Tab character</td>
+              <td colspan="4">Tab character</td>
             </tr>
             <tr>
               <th scope="row">%L</th>
-              <td colspan="3">Localized time stamp</td>
+              <td colspan="4">Localized time stamp</td>
             </tr>
           </tbody>
         </table>
         <ol>
-          <li id="n1">Including the <code>alt</code> attribute</li>
+          <li id="n1">Including an image’s <code>alt</code>-attribute</li>
           <li id="n2"><code>\n</code>. For HTML, you can insert <code>&lt;br /&gt;</code> into the template.</li>
         </ol>
       </article>
