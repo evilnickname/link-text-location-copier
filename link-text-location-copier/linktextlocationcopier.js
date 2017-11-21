@@ -61,6 +61,7 @@ const gettingStoredSettings = browser.storage.local.get();
 gettingStoredSettings.then(checkStoredSettings, onError);
 
 browser.contextMenus.onClicked.addListener(function(info, tab) {
+
   let text,
       link,
       outputtext,
@@ -87,17 +88,17 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
   if (clickedItem.outputAsHTML) { link = escapeHTML(link) }
 
   outputtext = clickedItem.template;
-  outputtext = outputtext.replace(/%T/g, text);
-  outputtext = outputtext.replace(/%U/g, link);
-  outputtext = outputtext.replace(/%I/g, function() {
-    return (info.mediaType && info.mediaType === 'image') ? info.srcUrl : '';
-  });
   outputtext = outputtext.replace(/%N/g, '\n');
   outputtext = outputtext.replace(/%B/g, '\t');
   outputtext = outputtext.replace(/%L/g, function() {
     var _ts = new Date();
     return _ts.toLocaleString();
   });
+  outputtext = outputtext.replace(/%I/g, function() {
+    return (info.mediaType && info.mediaType === 'image') ? info.srcUrl : '';
+  });
+  outputtext = outputtext.replace(/%T/g, text);
+  outputtext = outputtext.replace(/%U/g, link);
 
   const code = 'copyToClipboard(' + JSON.stringify(outputtext) + ',' + clickedItem.outputAsHTML +');';
 
