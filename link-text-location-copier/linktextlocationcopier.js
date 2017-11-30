@@ -61,7 +61,7 @@ const gettingStoredSettings = browser.storage.local.get();
 gettingStoredSettings.then(checkStoredSettings, onError);
 
 browser.contextMenus.onClicked.addListener(function(info, tab) {
-
+//  console.log(info)
   let text,
       link,
       outputtext,
@@ -84,6 +84,8 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
     text = info.selectionText;
   }
 
+  // decoded URIs for non-ANSI links when option is toggled
+  if (_addonSettings.useDecodedURI === true) { link = window.decodeURIComponent(link) }
   // Always HTML-escape external input to avoid XSS
   if (clickedItem.outputAsHTML) { link = escapeHTML(link) }
 

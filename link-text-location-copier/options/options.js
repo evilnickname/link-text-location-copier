@@ -12,6 +12,11 @@ function checkStoredSettings(storedSettings) {
   } else {
     _settings = storedSettings;
   }
+
+  if (_settings.useDecodedURI) {
+    document.getElementById('decodedURI').checked = true;
+  }
+
   buildCustomFormatTable();
 }
 
@@ -32,6 +37,12 @@ function saveOptions(event) {
     });
     _settings.menuItems[elem.dataset.n].contexts = activeContexts;
   });
+
+  if (document.getElementById('decodedURI').checked === true) {
+    _settings.useDecodedURI = true;
+  } else {
+    _settings.useDecodedURI = false;
+  }
 
   let savingOptions = browser.storage.local.set(_settings);
   event.preventDefault();

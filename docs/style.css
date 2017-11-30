@@ -17,7 +17,7 @@ main, header, footer {
   max-width: 960px;
   margin: 0 auto;
 }
-h2, h3, p {
+h2, p {
   margin-bottom: 1.5rem;
 }
 article {
@@ -226,20 +226,12 @@ table > caption::before {
   fill: currentColor;
   vertical-align: text-top;
 }
-/* ==========================================
-Single-colored icons can be modified like so:
-.icon-name {
-  font-size: 32px;
-  color: red;
-}
-========================================== */
-
 .icon-twitter     { width: 0.9287109375em; }
 .icon-image       { width: 1.0712890625em; }
 .icon-book        { width: 0.9306640625em; }
 .icon-edit        { width: 1.0009765625em; }
 .icon-github-alt  { width: 0.9287109375em; }
-
+.icon-cogs        { width: 1.0714285714285714em; }
 
 /* http://codepo8.github.io/css-fork-on-github-ribbon/ */
 .forkongithub {
