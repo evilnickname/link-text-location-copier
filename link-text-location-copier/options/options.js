@@ -107,9 +107,11 @@ function buildCustomFormatTable() {
 function addFormat() {
   let data = {},
       _$inputName = document.getElementById('format-displayname'),
-      _$inputTemplate = document.getElementById('format-template');
+      _$inputTemplate = document.getElementById('format-template'),
+      _$inputTitleOverride = document.getElementById('format-title-override');
 
   _$inputName.value = _$inputTemplate.value = '';
+  _$inputTitleOverride.checked = false;
 
   _$modal.querySelector('button[data-action=cancel]').addEventListener('click', closeModal, { once: true });
   _$modal.querySelector('button[data-action=save]').addEventListener('click', function (evt) {
@@ -119,7 +121,11 @@ function addFormat() {
     data.template = _$inputTemplate.value;
     data.slug = 'custom' + _settings.customMenuItems;
     data.contexts = ['link', 'page', 'selection'];
-
+    if (_$inputTitleOverride.checked) {
+      data.title = _$inputName.value.trim();
+    } else if (data.title && !_$inputTitleOverride.checked) {
+      delete data.title;
+    }
     _settings.customMenuItems += 1;
     _settings.menuItems.push(data);
 
@@ -138,7 +144,8 @@ function addSeparator() {
 function editFormat(menuItemToEdit) {
   let data = _settings.menuItems[menuItemToEdit],
       _$inputName = document.getElementById('format-displayname'),
-      _$inputTemplate = document.getElementById('format-template');
+      _$inputTemplate = document.getElementById('format-template'),
+      _$inputTitleOverride = document.getElementById('format-title-override');
 
   _$modal.querySelector('button[data-action=cancel]').addEventListener('click', closeModal, { once: true });
   _$modal.querySelector('button[data-action=save]').addEventListener('click', function (evt) {
@@ -146,6 +153,11 @@ function editFormat(menuItemToEdit) {
 
     data.displayName = _$inputName.value.trim();
     data.template = _$inputTemplate.value;
+    if (_$inputTitleOverride.checked) {
+      data.title = _$inputName.value.trim();
+    } else if (data.title && !_$inputTitleOverride.checked) {
+      delete data.title;
+    }
 
     _settings.menuItems[menuItemToEdit] = data;
 
@@ -155,7 +167,8 @@ function editFormat(menuItemToEdit) {
 
   _$inputName.value = data.displayName;
   _$inputTemplate.value = data.template;
-
+  _$inputTitleOverride.checked = data.title;
+  
   showModal();
 }
 

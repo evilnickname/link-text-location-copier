@@ -84,8 +84,16 @@ table {
   -ms-overflow-style:-ms-autohiding-scrollbar
 }
 
+table > caption {
+  width: 100%;
+}
+
 table > thead th {
   border-bottom: 1px solid currentColor;
+}
+
+table > tbody th {
+  text-align: left;
 }
 
 table > tbody tr {
@@ -100,6 +108,14 @@ table > caption::before {
   content: 'table ' counter(tables) ': ';
   font-style: italic;
   text-align: left;
+}
+
+table a {
+  font-size: 75%;
+  line-height: 1;
+  margin-left: -5px;
+  padding: 5px;
+  vertical-align: super;
 }
 
 .changelog {

@@ -52,16 +52,16 @@
       <article>
         <h2>About</h2>
 
-        <p><strong>Link Text and Location Copier</strong> is a <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a> <a href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions">WebExtension</a> that helps you creating links right from the context menu. It copies a link’s text and location, the page title and URL, or selected text and page url as either plain text, HTML, Markdown or BB Code links.</p>
+        <p><b>Link Text and Location Copier</b> is a <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a> <a href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions">WebExtension</a> that helps you creating links right from the context menu. It copies a link’s text and location, the page title and URL, or selected text and page url as either plain text, HTML, Markdown or BB Code links.</p>
 
         <div class="meta">
           <h3 class="meta__title">
             <img src="images/paint-brush.svg" alt="" />
-            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.4.5</a>
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.5.0</a>
           </h3>
           <div class="meta__content">
             <ul class="meta__data">
-              <li>Released on November 30th, 2017</li>
+              <li>Released on February 4th, 2018</li>
               <li><strong>Requires:</strong> Firefox 56+</li>
             </ul>
 
@@ -95,7 +95,7 @@
 
       <article>
         <h2>Translations</h2>
-        <p><strong>Link Text and Location Copier</strong> is currently available in English, Dutch and German.</p>
+        <p><b>Link Text and Location Copier</b> is currently available in English, Dutch and German.</p>
         <p>If you want to contribute a translation, <a href="#contact">please get in touch</a>.</p>
       </article>
 
@@ -145,6 +145,7 @@
       <article id="changelog">
         <h2><svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg> Changelog</h2>
         <ul class="changelog">
+          <li><span class="changelog__version">1.5.0</span><time class="changelog__pubdate">2018-02-04</time><span class="changelog__desc">Added context independent custom format variables. Added option to disable context menu prefix.</span></li>
           <li><span class="changelog__version">1.4.5</span><time class="changelog__pubdate">2017-11-30</time><span class="changelog__desc">Add option to disable encoding non-ANSI characters in link location.</span></li>
           <li><span class="changelog__version">1.4.4</span><time class="changelog__pubdate">2017-11-21</time><span class="changelog__desc">Fix broken Cyrillic links by changing the order in which the templates get parsed.</span></li>
           <li><span class="changelog__version">1.4.3</span><time class="changelog__pubdate">2017-11-17</time><span class="changelog__desc">Provisional support for Image Location added. Only works when right-clicking on a linked image, otherwise returns an empty string.</span></li>
@@ -176,7 +177,7 @@
 
         <p>Easy as pie: with the variables listed below, create whatever format you need.</p>
         <table>
-          <caption>Custom format variables</caption>
+          <caption>Context dependant custom format variables<br /> <i>(Deprecated. Will probably be removed in version 2.)</i></caption>
           <thead>
             <tr>
               <th scope="col">Variable</th>
@@ -208,23 +209,55 @@
               <td></td>
               <td>Image URL</td>
             </tr>
+          <tbody>
+        </table>
+
+        <table>
+          <caption>Context independent custom format variables</caption>
+          <thead>
+            <tr>
+              <th scope="col">Variable</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+            <tr>
+              <th scope="row">%linktitle%</th>
+              <td>Link title <a href="#n2">2</a></td>
+            </tr>
+            <tr>
+              <th scope="row">%linkurl%</th>
+              <td>Link URL <a href="#n2">2</a></td>
+            </tr>
+            <tr>
+              <th scope="row">%pagetitle%</th>
+              <td>Page title</td>
+            </tr>
+            <tr>
+              <th scope="row">%pageurl%</th>
+              <td>Page URL</td>
+            </tr>
+            <tr>
+              <th scope="row">%selection%</th>
+              <td>Selected text <a href="#n2">2</a></td>
+            </tr>
             <tr>
               <th scope="row">%N</th>
-              <td colspan="4">Newline character <a href="#n2">2</a></td>
+              <td>Newline character <a href="#n3">3</a></td>
             </tr>
             <tr>
               <th scope="row">%B</th>
-              <td colspan="4">Tab character</td>
+              <td>Tab character</td>
             </tr>
             <tr>
               <th scope="row">%L</th>
-              <td colspan="4">Localized time stamp</td>
+              <td>Localized time stamp</td>
             </tr>
           </tbody>
         </table>
         <ol>
           <li id="n1">Including an image’s <code>alt</code>-attribute</li>
-          <li id="n2"><code>\n</code>. For HTML, you can insert <code>&lt;br /&gt;</code> into the template.</li>
+          <li id="n2">Will return an empty string when unavailable.</li>
+          <li id="n3"><code>\n</code>. For HTML, you can insert <code>&lt;br /&gt;</code> into the template.</li>
         </ol>
       </article>
 
@@ -236,6 +269,10 @@
             <h3>Don’t encode link location</h3>
             <p>Firefox encodes non-ANSI characters (Cyrillic, Greek, Vietnamese, what-have-you) in <a href="https://developer.mozilla.org/en-US/docs/Glossary/URL">URL</a>s by default when copying. Links like <code>https://ru.wikipedia.org/wiki/Браузер</code> get turned into <code>https://ru.wikipedia.org/wiki/%D0%91%D1%80%D0%B0%D1%83%D0%B7%D0%B5%D1%80</code> when pasted.</p>
             <p>To prevent this, turn this feature on and save settings.</p>
+          </li>
+          <li id="override-menu">
+            <h3>Don’t show context menu prefix</h3>
+            <p>By default, <b>Link Text and Location Copier</b> shows a “Copy … as ” prefix in te context menu before the <code>menu label</code> you set as custom format. This option allows you to overide this behavior, and uses the <code>menu label</code> <em>as is</em> in the context menu.</p>
           </li>
         </ul>
       </article>

@@ -61,7 +61,7 @@ const gettingStoredSettings = browser.storage.local.get();
 gettingStoredSettings.then(checkStoredSettings, onError);
 
 browser.contextMenus.onClicked.addListener(function(info, tab) {
-//  console.log(info)
+  // console.log(info, tab)
   let text,
       link,
       outputtext,
@@ -99,6 +99,13 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
   outputtext = outputtext.replace(/%I/g, function() {
     return (info.mediaType && info.mediaType === 'image') ? info.srcUrl : '';
   });
+
+  outputtext = outputtext.replace(/%linktitle%/g, info.linkUrl);
+  outputtext = outputtext.replace(/%linkurl%/g, info.linkText);
+  outputtext = outputtext.replace(/%pagetitle%/g, tab.url);
+  outputtext = outputtext.replace(/%pageurl%/g, tab.title);
+  outputtext = outputtext.replace(/%selection%/g, info.selectionText);
+
   outputtext = outputtext.replace(/%T/g, text);
   outputtext = outputtext.replace(/%U/g, link);
 

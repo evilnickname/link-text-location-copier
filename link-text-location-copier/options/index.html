@@ -40,15 +40,23 @@
       font-family: monospace;
     }
 
+    .modal {
+      width: 50vw;
+      position: fixed;
+      top: 25vh;
+    }
     .modal::backdrop {
       background: rgba(255,0,0,.25);
     }
-    .modal .browser-style {
+    .modal .input-wrapper {
       display: flex;
     }
-    .modal .browser-style label {
+    .modal .input-wrapper label {
       margin-right: auto;
       padding-right: 2em;
+    }
+    .modal .input-wrapper input {
+      width: 70%;
     }
     .modal .format-info {
       margin: 1em 0;
@@ -143,22 +151,31 @@
 
     <dialog class="modal" id="formatDialog">
       <form method="dialog">
-        <div class="browser-style">
+        <div class="input-wrapper">
           <label for="format-displayname">Menu label</label>
           <input type="text" id="format-displayname" />
         </div>
-        <div class="browser-style">
+        <div class="input-wrapper">
           <label for="format-template">Format</label>
           <input type="text" id="format-template" />
         </div>
-        <div class="format-info">
+        <div>
+          <label><input type="checkbox" id="format-title-override" /> Don’t show context menu prefix </label> (<a href="https://evilnickname.github.io/link-text-location-copier/#override-menu">what’s this?</a>)
+        </div>
+        <details class="format-info">
+          <summary>Custom format variables</summary>
           <b>%T</b> — Link title, page title, or text selection<br />
           <b>%U</b> — Link location, or page location<br />
           <b>%I</b> — Image location (linked images only)<br />
+          <b>%linktitle%</b> — Link title<br />
+          <b>%linkurl%</b> — Link URL<br />
+          <b>%pagetitle%</b> — Page title<br />
+          <b>%pageurl%</b> — Page URL<br />
+          <b>%selection%</b> — Selected text<br />
           <b>%N</b> — Newline character<br />
           <b>%B</b> — Tab character<br />
           <b>%L</b> — Localized time stamp
-        </div>
+        </details>
         <div class="buttons">
           <button class="browser-style" type="button" data-action="cancel">cancel</button>
           <button class="browser-style" type="button" data-action="save">save</button>
