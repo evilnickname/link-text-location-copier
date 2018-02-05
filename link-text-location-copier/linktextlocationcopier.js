@@ -102,8 +102,8 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
 
   outputtext = outputtext.replace(/%linktitle%/g, info.linkUrl);
   outputtext = outputtext.replace(/%linkurl%/g, info.linkText);
-  outputtext = outputtext.replace(/%pagetitle%/g, tab.url);
-  outputtext = outputtext.replace(/%pageurl%/g, tab.title);
+  outputtext = outputtext.replace(/%pagetitle%/g, tab.title);
+  outputtext = outputtext.replace(/%pageurl%/g, tab.url);
   outputtext = outputtext.replace(/%selection%/g, info.selectionText);
 
   outputtext = outputtext.replace(/%T/g, text);
