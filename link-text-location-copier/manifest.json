@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Link Text and Location Copier",
   "description": "__MSG_extensionDescription__",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "homepage_url": "https://evilnickname.github.io/link-text-location-copier",
   "default_locale": "en",
 

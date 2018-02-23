@@ -57,11 +57,11 @@
         <div class="meta">
           <h3 class="meta__title">
             <img src="images/paint-brush.svg" alt="" />
-            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.5.1</a>
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.6.0</a>
           </h3>
           <div class="meta__content">
             <ul class="meta__data">
-              <li>Released on February 5th, 2018</li>
+              <li>Released on February 23rd, 2018</li>
               <li><strong>Requires:</strong> Firefox 56+</li>
             </ul>
 
@@ -118,6 +118,7 @@
               <li>Further enhancements TBA</li>
             </ul>
           </li>
+          <li>Improve and expose test page</li>
           <li>Add support for copying (linked) images</li>
           <li>Make extension work in Chrome/Opera/Edge</li>
         </ul>
@@ -145,6 +146,7 @@
       <article id="changelog">
         <h2><svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg> Changelog</h2>
         <ul class="changelog">
+          <li><span class="changelog__version">1.6.0</span><time class="changelog__pubdate">2018-02-22</time><span class="changelog__desc">Enables support for copying from inside an (i)frame. Adds %documenturl% variable.</span></li>
           <li><span class="changelog__version">1.5.1</span><time class="changelog__pubdate">2018-02-05</time><span class="changelog__desc">Fixed a stupid bug where the values of %pageurl% and %pagetitle% were the wrong way around.</span></li>
           <li><span class="changelog__version">1.5.0</span><time class="changelog__pubdate">2018-02-04</time><span class="changelog__desc">Added context independent custom format variables. Added option to disable context menu prefix.</span></li>
           <li><span class="changelog__version">1.4.5</span><time class="changelog__pubdate">2017-11-30</time><span class="changelog__desc">Add option to disable encoding non-ANSI characters in link location.</span></li>
@@ -169,6 +171,7 @@
         <ul>
         <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1343236">Before Firefox 56</a> the link title will always be “undefined”.</li>
         <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1338898">Before Firefox 56</a> text selection is limited to 150 characters.</li>
+        <li>The title and url of pages inside a (i)frame cannot be copied.</li>
         <li>If you have set the about:config preference <code>dom.event.clipboardevents.enabled</code> to <b>false</b>, this add-on will not work.</li>
         <li><b>Link Text and Location Copier</b> will not work on XML documents, as these do not support <code>document.execCommand(copy)</code>.</li>
         </ul>
@@ -201,7 +204,7 @@
               <th scope="row">%U</th>
               <td>Link URL</td>
               <td>Page URL</td>
-              <td>Page URL</td>
+              <td>Document URL <a href="#n2">2</a></td>
               <td>Link URL</td>
             </tr>
             <tr>
@@ -224,11 +227,11 @@
           </thead>
             <tr>
               <th scope="row">%linktitle%</th>
-              <td>Link title <a href="#n2">2</a></td>
+              <td>Link title <a href="#n3">3</a></td>
             </tr>
             <tr>
               <th scope="row">%linkurl%</th>
-              <td>Link URL <a href="#n2">2</a></td>
+              <td>Link URL <a href="#n3">3</a></td>
             </tr>
             <tr>
               <th scope="row">%pagetitle%</th>
@@ -236,15 +239,19 @@
             </tr>
             <tr>
               <th scope="row">%pageurl%</th>
-              <td>Page URL</td>
+              <td>URL of the page (i.e., the URL in the addressbar)</td>
+            </tr>
+            <tr>
+              <th scope="row">%documenturl%</th>
+              <td>URL of the document containing to be copied link/selection <a href="#n2">2</a></td>
             </tr>
             <tr>
               <th scope="row">%selection%</th>
-              <td>Selected text <a href="#n2">2</a></td>
+              <td>Selected text <a href="#n3">3</a></td>
             </tr>
             <tr>
               <th scope="row">%N</th>
-              <td>Newline character <a href="#n3">3</a></td>
+              <td>Newline character <a href="#n4">4</a></td>
             </tr>
             <tr>
               <th scope="row">%B</th>
@@ -258,8 +265,9 @@
         </table>
         <ol>
           <li id="n1">Including an image’s <code>alt</code>-attribute</li>
-          <li id="n2">Will return an empty string when unavailable.</li>
-          <li id="n3"><code>\n</code>. For HTML, you can insert <code>&lt;br /&gt;</code> into the template.</li>
+          <li id="n2">When used inside a (i)frame, it will return the URL of the framed page.</li>
+          <li id="n3">Will return an empty string when unavailable.</li>
+          <li id="n4"><code>\n</code>. For HTML, you can insert <code>&lt;br /&gt;</code> into the template.</li>
         </ol>
       </article>
 
@@ -284,6 +292,7 @@
         <ul>
           <li>Totally inspired by/based on Jonah Bishop’s <a href="https://www.borngeek.com/firefox/colt/">CoLT</a>. (<a href="https://github.com/jgbishop/colt/blob/master/LICENSE.txt">license</a>)</li>
           <li>The Copy-to-clipboard functionality is lifted from Firefox’s <a href="https://github.com/mdn/webextensions-examples/tree/master/context-menu-copy-link-with-types">context-menu-copy-link-with-types</a> example. (<a href="https://github.com/mdn/webextensions-examples/blob/master/LICENSE">license</a>)</li>
+          <li>Thanks to <a href="https://github.com/def00111">def00111</a> for alerting me to the (i)frame issue resolved in version 1.6.0.</li>
           <li>The <a href="https://www.flaticon.com/free-icon/paint-brush_178388">Paint Brush Icon</a> made by <a href="https://flat-icons.com/">Flat Icons</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC 3.0 BY</a></li>
           <li>The icons on this page are from <a href="http://fontawesome.io">Font Awesome</a>, subsetted through the <a href="https://icomoon.io/">IcoMoon App</a>.
         </ul>

@@ -61,7 +61,7 @@ const gettingStoredSettings = browser.storage.local.get();
 gettingStoredSettings.then(checkStoredSettings, onError);
 
 browser.contextMenus.onClicked.addListener(function(info, tab) {
-  // console.log(info, tab)
+  //console.log(info, tab)
   let text,
       link,
       outputtext,
@@ -80,7 +80,7 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
     link = tab.url;
     text = tab.title;
   } else if (clickedContext === 'selection') {
-    link = info.pageUrl;
+    link = info.pageUrl === info.frameUrl ? info.pageUrl : info.frameUrl;
     text = info.selectionText;
   }
 
@@ -104,6 +104,7 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
   outputtext = outputtext.replace(/%linkurl%/g, info.linkText);
   outputtext = outputtext.replace(/%pagetitle%/g, tab.title);
   outputtext = outputtext.replace(/%pageurl%/g, tab.url);
+  outputtext = outputtext.replace(/%documenturl%/g, info.frameUrl);
   outputtext = outputtext.replace(/%selection%/g, info.selectionText);
 
   outputtext = outputtext.replace(/%T/g, text);

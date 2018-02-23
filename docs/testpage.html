@@ -22,11 +22,19 @@
       </li>
       <li>
         <a href="https://ru.wikipedia.org/wiki/Заглавная_страница">Заглавная страница</a> <a href="https://ko.wikipedia.org/wiki/위키백과:대문">위키백과:대문</a> (test links for non-ANSI characters)
+      </li>
       <li>
         <a href="https://www.flaticon.com/free-icon/paint-brush_178388"><img src="images/paint-brush.png" alt="Addon logo (alt linked image)" /></a> (linked image)
       </li>
       <li>
         <img src="images/paint-brush.png" alt="Addon logo (alt image)" /> (image)
+      </li>
+      <li>
+        Copying from inside (i)frames should work. (href of iframe = <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-srcdoc">about:srcdoc</a>)<br />
+        <iframe srcdoc="
+          <a href='https://github.com/evilnickname/link-text-location-copier' title=title attribute'>Link to the Link Text and Location Copier homepage</a>
+          <a href='https://ru.wikipedia.org/wiki/Заглавная_страница'>Заглавная страница</a>
+        " style="width:50%; height: 50px;"></iframe>
       </li>
     </ul>
     <textarea id="output--text"></textarea>
