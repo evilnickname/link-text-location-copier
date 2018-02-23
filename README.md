@@ -3,7 +3,7 @@ Firefox web extension that helps you creating links right from the context menu.
 
 [Install **Link Text and Location Copier** from addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/)
 
-[Documentation and changelog](https://github.com/evilnickname/link-text-location-copier)
+[Documentation and changelog](https://evilnickname.github.io/link-text-location-copier/)
 
 Heavily inspired by the [CoLT](https://github.com/jgbishop/colt) add-on, using code from Firefox's [context-menu-copy-link-with-types](https://github.com/mdn/webextensions-examples/tree/master/context-menu-copy-link-with-types)  web extension example.
 
