@@ -72,8 +72,6 @@ function buildCustomFormatTable() {
         _rowTemplate.querySelector(`[data-context=${context}]`).checked = (menuItem.contexts.indexOf(context) > -1) ? true : false;
       }
 
-      _rowTemplate.querySelector('button[data-action=edit]').hidden = (menuItem.locked) ? true : null;
-
       _rowTemplate.querySelector('tr').setAttribute('data-n', _n);
       _buffer.appendChild(document.importNode(_rowTemplate, true));
     }
@@ -108,9 +106,11 @@ function addFormat() {
   let data = {},
       _$inputName = document.getElementById('format-displayname'),
       _$inputTemplate = document.getElementById('format-template'),
+      _$outputAsHTML = document.getElementById('output-as-html'),
       _$inputTitleOverride = document.getElementById('format-title-override');
 
   _$inputName.value = _$inputTemplate.value = '';
+  _$outputAsHTML.checked = false;
   _$inputTitleOverride.checked = false;
 
   _$modal.querySelector('button[data-action=cancel]').addEventListener('click', closeModal, { once: true });
@@ -126,6 +126,12 @@ function addFormat() {
     } else if (data.title && !_$inputTitleOverride.checked) {
       delete data.title;
     }
+    if (_$outputAsHTML.checked) {
+      data.outputAsHTML = true;
+    } else {
+      delete data.outputAsHTML;
+    }
+
     _settings.customMenuItems += 1;
     _settings.menuItems.push(data);
 
@@ -145,6 +151,7 @@ function editFormat(menuItemToEdit) {
   let data = _settings.menuItems[menuItemToEdit],
       _$inputName = document.getElementById('format-displayname'),
       _$inputTemplate = document.getElementById('format-template'),
+      _$outputAsHTML = document.getElementById('output-as-html'),
       _$inputTitleOverride = document.getElementById('format-title-override');
 
   _$modal.querySelector('button[data-action=cancel]').addEventListener('click', closeModal, { once: true });
@@ -158,7 +165,11 @@ function editFormat(menuItemToEdit) {
     } else if (data.title && !_$inputTitleOverride.checked) {
       delete data.title;
     }
-
+    if (_$outputAsHTML.checked) {
+      data.outputAsHTML = true;
+    } else {
+      delete data.outputAsHTML;
+    }
     _settings.menuItems[menuItemToEdit] = data;
 
     buildCustomFormatTable();
@@ -167,8 +178,9 @@ function editFormat(menuItemToEdit) {
 
   _$inputName.value = data.displayName;
   _$inputTemplate.value = data.template;
+  _$outputAsHTML.checked = data.outputAsHTML;
   _$inputTitleOverride.checked = data.title;
-  
+
   showModal();
 }
 
@@ -210,8 +222,63 @@ function resetOptions() {
   init();
 }
 
+function exportSettings() {
+  const content = JSON.stringify(_settings),
+        file = new Blob([content], {type: 'text/plain'});
+
+  const elem = document.createElement("A");
+  elem.href = URL.createObjectURL(file);
+  elem.download = 'link-text-location-copier.json';
+  document.body.appendChild(elem);
+  elem.click();
+  document.body.removeChild(elem);
+}
+
+function validateImportedSettings(imported) {
+  if (!imported.hasOwnProperty('contexts'))   return false;
+  if (!imported.hasOwnProperty('strings'))    return false;
+  if (!imported.hasOwnProperty('menuItems'))  return false;
+
+  return true;
+}
+
+function importSettings() {
+  var file = this.files[0],
+      imported;
+
+  if (file) {
+      var reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload = function (evt) {
+        if(evt.target.result) {
+            try {
+                imported = JSON.parse(evt.target.result);
+            } catch(e) {
+                alert("JSON does not parse.");
+            }
+        }
+        imported = JSON.parse(evt.target.result);
+        console.log(imported);
+
+        if (validateImportedSettings(imported)) {
+          _settings = imported;
+          buildCustomFormatTable();
+        } else {
+          alert("These settings don’t seem to match the required format.");
+        }
+
+      }
+      reader.onerror = function (evt) {
+          document.getElementById("fileContents").innerHTML = "error reading file";
+      }
+  }
+}
+
 document.getElementById('reset').addEventListener('click', resetOptions);
 document.getElementById('save').addEventListener('click', saveOptions);
+document.getElementById('export').addEventListener('click', exportSettings);
+document.getElementById('import').addEventListener('change', importSettings);
+document.getElementById('importBtn').addEventListener('click', () => document.getElementById('import').click());
 document.getElementById('addCustomFormat').addEventListener('click', addFormat);
 document.getElementById('addSeparator').addEventListener('click', addSeparator);
 

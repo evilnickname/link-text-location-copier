@@ -51,11 +51,10 @@ const defaults = {
     },
     {
       slug: 'richtext',
-      displayName: 'Rich Text',
+      displayName: 'rich text',
       template: '<a href="%U">%T</a>',
       contexts: ['link', 'page'],
-      outputAsHTML: true,
-      locked: true
+      outputAsHTML: true
     }
   ],
   customMenuItems: 0

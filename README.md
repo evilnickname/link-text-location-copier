@@ -15,10 +15,10 @@ Heavily inspired by the [CoLT](https://github.com/jgbishop/colt) add-on, using c
 * ~~Come up with better icon~~
 * ~~Add documentation~~
 * ~~Make configurable/Customization~~
-    * Toggle local/synced storage
+    * ~~Toggle local/synced storage~~ (use export/import)
     * Make options page prettier
     * Internationalize options page
-    * Export/Import settings
+    * ~~Export/Import settings~~
     * Conditional logic for templates
     * Further enhancements TBA
 * ~~Requested: Rich Text format~~

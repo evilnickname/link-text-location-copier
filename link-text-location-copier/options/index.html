@@ -95,6 +95,11 @@
         <label><input type="checkbox" id="decodedURI" class="browser-style"/> Don’t encode link location</label>
         (<a href="https://evilnickname.github.io/link-text-location-copier/#option-urls">what’s this?</a>)
       </span>
+      <div>
+        <button class="browser-style" type="button" id="export">Export settings</button>
+        <input type="file" id="import" accept="text/plain" hidden></button>
+        <button class="browser-style" type="button" id="importBtn">Import settings</button>
+      </div>
 
       <hr />
       <div class="buttons">
@@ -158,6 +163,9 @@
         <div class="input-wrapper">
           <label for="format-template">Format</label>
           <input type="text" id="format-template" />
+        </div>
+        <div>
+          <label><input type="checkbox" id="output-as-html" /> Output as rich text </label> (<a href="https://evilnickname.github.io/link-text-location-copier/#rich-text">custom format should be HTML</a>)
         </div>
         <div>
           <label><input type="checkbox" id="format-title-override" /> Don’t show context menu prefix </label> (<a href="https://evilnickname.github.io/link-text-location-copier/#override-menu">what’s this?</a>)

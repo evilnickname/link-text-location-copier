@@ -57,11 +57,11 @@
         <div class="meta">
           <h3 class="meta__title">
             <img src="images/paint-brush.svg" alt="" />
-            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.6.0</a>
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.7.0</a>
           </h3>
           <div class="meta__content">
             <ul class="meta__data">
-              <li>Released on February 23rd, 2018</li>
+              <li>Released on April 19th, 2018</li>
               <li><strong>Requires:</strong> Firefox 56+</li>
             </ul>
 
@@ -110,10 +110,10 @@
           <li><del>Feature Request: Add support for Rich Text format</del></li>
           <li><del>Make configurable/Customization</del>
             <ul>
-              <li>Toggle local/synced storage</li>
+              <li><del>Toggle local/synced storage</del> (use export/import)</li>
               <li>Make options page prettier</li>
               <li>Internationalize options page</li>
-              <li>Import/Export settings</li>
+              <li><del>Import/Export settings</del></li>
               <li>Conditional logic for templates</li>
               <li>Further enhancements TBA</li>
             </ul>
@@ -146,6 +146,7 @@
       <article id="changelog">
         <h2><svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg> Changelog</h2>
         <ul class="changelog">
+          <li><span class="changelog__version">1.7.0</span><time class="changelog__pubdate">2018-04-19</time><span class="changelog__desc">Export and import your customized settings. Enabling editing of rich text.</span></li>
           <li><span class="changelog__version">1.6.0</span><time class="changelog__pubdate">2018-02-22</time><span class="changelog__desc">Enables support for copying from inside an (i)frame. Adds %documenturl% variable.</span></li>
           <li><span class="changelog__version">1.5.1</span><time class="changelog__pubdate">2018-02-05</time><span class="changelog__desc">Fixed a stupid bug where the values of %pageurl% and %pagetitle% were the wrong way around.</span></li>
           <li><span class="changelog__version">1.5.0</span><time class="changelog__pubdate">2018-02-04</time><span class="changelog__desc">Added context independent custom format variables. Added option to disable context menu prefix.</span></li>
@@ -169,11 +170,11 @@
       <article>
         <h2>Known issues</h2>
         <ul>
-        <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1343236">Before Firefox 56</a> the link title will always be “undefined”.</li>
-        <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1338898">Before Firefox 56</a> text selection is limited to 150 characters.</li>
-        <li>The title and url of pages inside a (i)frame cannot be copied.</li>
-        <li>If you have set the about:config preference <code>dom.event.clipboardevents.enabled</code> to <b>false</b>, this add-on will not work.</li>
-        <li><b>Link Text and Location Copier</b> will not work on XML documents, as these do not support <code>document.execCommand(copy)</code>.</li>
+          <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1343236">Before Firefox 56</a> the link title will always be “undefined”.</li>
+          <li><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1338898">Before Firefox 56</a> text selection is limited to 150 characters.</li>
+          <li>The title and url of pages inside a (i)frame cannot be copied.</li>
+          <li>If you have set the about:config preference <code>dom.event.clipboardevents.enabled</code> to <b>false</b>, this add-on will not work.</li>
+          <li><b>Link Text and Location Copier</b> will not work on XML documents, as these do not support <code>document.execCommand(copy)</code>.</li>
         </ul>
       </article>
 
@@ -277,13 +278,16 @@
         <ul>
           <li id="option-urls">
             <h3>Don’t encode link location</h3>
-            <p>Firefox encodes non-ANSI characters (Cyrillic, Greek, Vietnamese, what-have-you) in <a href="https://developer.mozilla.org/en-US/docs/Glossary/URL">URL</a>s by default when copying. Links like <code>https://ru.wikipedia.org/wiki/Браузер</code> get turned into <code>https://ru.wikipedia.org/wiki/%D0%91%D1%80%D0%B0%D1%83%D0%B7%D0%B5%D1%80</code> when pasted.</p>
+            <p>Firefox encodes non-<abbr>ANSI</abbr> characters (Cyrillic, Greek, Vietnamese, what-have-you) in <a href="https://developer.mozilla.org/en-US/docs/Glossary/URL">URL</a>s by default when copying. Links like <code>https://ru.wikipedia.org/wiki/Браузер</code> get turned into <code>https://ru.wikipedia.org/wiki/%D0%91%D1%80%D0%B0%D1%83%D0%B7%D0%B5%D1%80</code> when pasted.</p>
             <p>To prevent this, turn this feature on and save settings.</p>
           </li>
           <li id="override-menu">
             <h3>Don’t show context menu prefix</h3>
             <p>By default, <b>Link Text and Location Copier</b> shows a “Copy … as ” prefix in te context menu before the <code>menu label</code> you set as custom format. This option allows you to overide this behavior, and uses the <code>menu label</code> <em>as is</em> in the context menu.</p>
           </li>
+          <li id="rich-text">
+            <h3>Output as rich text</h3>
+            <p>Useful for copying links straight into word processors or email clients. For this to work, the custom format should be an <abbr>HTML</abbr>-string. (The custom format will <em>not</em> be validated.)</p>
         </ul>
       </article>
 
