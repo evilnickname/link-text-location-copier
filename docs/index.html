@@ -72,11 +72,11 @@
         <div class="meta">
           <h3 class="meta__title">
             <img src="images/paint-brush.svg" alt="" />
-            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.7.0</a>
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.7.1</a>
           </h3>
           <div class="meta__content">
             <ul class="meta__data">
-              <li>Released on April 19th, 2018</li>
+              <li>Released on May 22nd, 2018</li>
               <li><strong>Requires:</strong> Firefox 56+</li>
             </ul>
 
@@ -161,6 +161,7 @@
       <article id="changelog">
         <h2><svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg> Changelog</h2>
         <ul class="changelog">
+          <li><span class="changelog__version">1.7.1</span><time class="changelog__pubdate">2018-05-22</time><span class="changelog__desc">Fixed a stupid bug where the values of %linktitle% and %linkurl% were the wrong way around.</span></li>
           <li><span class="changelog__version">1.7.0</span><time class="changelog__pubdate">2018-04-19</time><span class="changelog__desc">Export and import your customized settings. Enabling editing of rich text.</span></li>
           <li><span class="changelog__version">1.6.0</span><time class="changelog__pubdate">2018-02-22</time><span class="changelog__desc">Enables support for copying from inside an (i)frame. Adds %documenturl% variable.</span></li>
           <li><span class="changelog__version">1.5.1</span><time class="changelog__pubdate">2018-02-05</time><span class="changelog__desc">Fixed a stupid bug where the values of %pageurl% and %pagetitle% were the wrong way around.</span></li>
@@ -302,7 +303,7 @@
           </li>
           <li id="rich-text">
             <h3>Output as rich text</h3>
-            <p>Useful for copying links straight into word processors or email clients. For this to work, the custom format should be an <abbr>HTML</abbr>-string. (The custom format will <em>not</em> be validated.)</p>
+            <p>Useful for copying links straight into word processors or email clients. For this to work, the custom format <em>should</em> be an <abbr>HTML</abbr>-string. (The custom format will <em>not</em> be validated.)</p>
         </ul>
       </article>
 
@@ -329,7 +330,7 @@
         </ul>
       </article>
       <footer>
-        <small><span id="copyright">© 2017</span> <a href="https://www.evilnickname.org/">William Groenendijk</a>.</small>
+        <small><span id="copyright">© 2018</span> <a href="https://www.evilnickname.org/">William Groenendijk</a>.</small>
       </footer>
     </main>
 
@@ -349,8 +350,8 @@
         email.removeChild(email.querySelector('.i'));
         email.previousElementSibling.setAttribute('href', 'mailto:' + email.innerText.split('').reverse().join(''));
 
-        if (new Date().getFullYear() > 2017) {
-          d.getElementById('copyright').textContent =  '© 2017–' + new Date().getFullYear();
+        if (new Date().getFullYear() > 2018) {
+          d.getElementById('copyright').textContent =  '© 2018–' + new Date().getFullYear();
         }
       })(document);
     </script>

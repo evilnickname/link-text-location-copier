@@ -100,8 +100,8 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
     return (info.mediaType && info.mediaType === 'image') ? info.srcUrl : '';
   });
 
-  outputtext = outputtext.replace(/%linktitle%/g, info.linkUrl);
-  outputtext = outputtext.replace(/%linkurl%/g, info.linkText);
+  outputtext = outputtext.replace(/%linktitle%/g, info.linkText);
+  outputtext = outputtext.replace(/%linkurl%/g, info.linkUrl);
   outputtext = outputtext.replace(/%pagetitle%/g, tab.title);
   outputtext = outputtext.replace(/%pageurl%/g, tab.url);
   outputtext = outputtext.replace(/%documenturl%/g, info.frameUrl);
