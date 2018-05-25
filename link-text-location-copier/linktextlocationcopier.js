@@ -80,7 +80,7 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
     link = tab.url;
     text = tab.title;
   } else if (clickedContext === 'selection') {
-    link = info.pageUrl === info.frameUrl ? info.pageUrl : info.frameUrl;
+    link = (info.frameUrl === undefined) ? info.pageUrl : info.frameUrl;
     text = info.selectionText;
   }
 
