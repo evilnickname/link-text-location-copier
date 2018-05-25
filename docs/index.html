@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Link Text and Location Copier</title>
+
+    <link rel="dns-prefetch" href="https://brick.a.ssl.fastly.net/" />
+
     <link rel="icon" href="images/paint-brush.svg" sizes="any" type="image/svg+xml" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Fira+Mono:400,700/Fira+Sans:400, 400i,700" />
@@ -54,6 +57,10 @@
           <title>envelope</title>
           <path d="M28 11.094v12.406c0 1.375-1.125 2.5-2.5 2.5h-23c-1.375 0-2.5-1.125-2.5-2.5v-12.406c0.469 0.516 1 0.969 1.578 1.359 2.594 1.766 5.219 3.531 7.766 5.391 1.313 0.969 2.938 2.156 4.641 2.156h0.031c1.703 0 3.328-1.188 4.641-2.156 2.547-1.844 5.172-3.625 7.781-5.391 0.562-0.391 1.094-0.844 1.563-1.359zM28 6.5c0 1.75-1.297 3.328-2.672 4.281-2.438 1.687-4.891 3.375-7.313 5.078-1.016 0.703-2.734 2.141-4 2.141h-0.031c-1.266 0-2.984-1.437-4-2.141-2.422-1.703-4.875-3.391-7.297-5.078-1.109-0.75-2.688-2.516-2.688-3.938 0-1.531 0.828-2.844 2.5-2.844h23c1.359 0 2.5 1.125 2.5 2.5z"></path>
         </symbol>
+        <symbol id="icon-flask" viewBox="0 0 26 28">
+          <title>flask</title>
+          <path d="M23.859 22.625c1.172 1.859 0.344 3.375-1.859 3.375h-18c-2.203 0-3.031-1.516-1.859-3.375l7.859-12.391v-6.234h-1c-0.547 0-1-0.453-1-1s0.453-1 1-1h8c0.547 0 1 0.453 1 1s-0.453 1-1 1h-1v6.234zM11.688 11.297l-4.25 6.703h11.125l-4.25-6.703-0.313-0.484v-6.813h-2v6.813z"></path>
+        </symbol>
       </defs>
     </svg>
 
@@ -98,6 +105,10 @@
                 <a href="#changelog">Changelog</a>
               </li>
               <li>
+                <svg class="icon icon-flask"><use xlink:href="#icon-flask"></use></svg>
+                <a href="/test/">Test page</a>
+              </li>
+              <li>
                 <svg class="icon icon-github-alt"><use xlink:href="#icon-github-alt"></use></svg>
                 <a href="https://github.com/evilnickname/link-text-location-copier">View source on GitHub</a>
               </li>
@@ -133,7 +144,7 @@
               <li>Further enhancements TBA</li>
             </ul>
           </li>
-          <li>Improve and expose test page</li>
+          <li><del>Improve and expose test page</del></li>
           <li>Add support for copying (linked) images</li>
           <li>Make extension work in Chrome/Opera/Edge</li>
         </ul>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Link Text and Location Copier test page</title>
+
+    <link rel="dns-prefetch" href="https://brick.a.ssl.fastly.net/" />
+
+    <link rel="icon" href="../images/paint-brush.svg" sizes="any" type="image/svg+xml" />
+    <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Fira+Mono:400/Fira+Sans:400,700" />
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        font-size: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font: 20px/1.5 'Fira Sans';
+        background-color: #f9f9f9;
+      }
+      main {
+        margin: 0 1rem;
+      }
+      h1, h2 {
+        margin: 1rem;
+        text-align: center;
+      }
+
+      dt { font-weight: 700; }
+      dd { margin: 0 1rem 1rem; }
+
+      iframe {
+        display: block;
+        padding: .5rem;
+        height: 3rem;
+        width: 100%;
+      }
+
+      .test__images {
+        display: flex;
+      }
+      .test__images > div {
+        margin-right: 1rem;
+        text-align: center;
+      }
+      .test__images span {
+        display: block;
+        font: 16px 'Fira Mono';
+      }
+
+      .testarea {
+        background-color: #f9f9f9;
+        position: sticky;
+        top: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+      }
+
+      .testarea > h2 {
+        flex: none;
+        margin: 0;
+        width: 100%;
+      }
+      
+      .testarea__editor {
+        border: 1px solid darkgray;
+        background-color: rgba(255,255,255,.75);
+        font: 16px/1.5 'Fira Mono';
+        flex: 0 0 calc(50% - .5rem);
+        padding: 0.5rem;
+      }
+
+      ::placeholder, .testarea__editor.pristine > span {
+        opacity: 0.75;
+      }
+          
+    </style>
+
+  </head>
+
+  <body>
+    <main>
+      <h1>Link Text and Location Copier Test Page</h1>
+      <section class="testarea">
+          <h2>Testing area</h2>
+          <textarea class="testarea__editor" id="output--text" placeholder="Testing area"></textarea>
+          <div class="testarea__editor pristine" id="output--richtext" contentEditable><span>Rich Text Testing Area</span></div>
+        </section>
+      <section class="tests">
+        <h2>Test cases</h2>
+        <dl>
+          <dt>Text links</dt>
+          <dd>
+            <a href="https://evilnickname.github.io/link-text-location-copier/" title="title attribute">Link to the Link Text and Location Copier homepage</a><br />
+            <a href="http://example.com/testlink-with-(parentheses)">Link with parentheses [might be troublesome with Markdown]</a>
+          </dd>
+          <dt>Text links with non-ANSI characters</dt>
+          <dd>
+            <a href="https://ru.wikipedia.org/wiki/Заглавная_страница">Заглавная страница</a><br />
+            <a href="https://ko.wikipedia.org/wiki/위키백과:대문">위키백과:대문</a>
+          </dd>
+          <dt>Images</dt>
+          <dd class="test__images">
+            <div>
+              <span>Linked image</span>              
+              <a href="https://www.flaticon.com/free-icon/paint-brush_178388">
+                <img src="../images/paint-brush.png" alt="Addon logo (alt linked image)" />
+              </a>
+            </div>
+            <div>
+              <span>Plain image</span>
+              <img src="../images/paint-brush.png" alt="Addon logo (alt image)" />
+            </div>
+          </dd>
+          <dt>(i)Frame[<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-srcdoc">srcdoc</a>]</dt>
+          <dd>
+            <iframe srcdoc="<a href='https://github.com/evilnickname/link-text-location-copier' title=title attribute'>Link Text and Location Copier on Github</a>"></iframe>
+          </dd>
+          <dt>Text (for selection)</dt>
+          <dd>
+            <p>Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
+            <p>Bring to the table win-win survival strategies to <a href="http://www.cipsum.com/">ensure proactive domination</a>. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.</p>
+          </dd>
+        </dl>
+      </section>
+    </main>
+
+    <script>
+      document.getElementById('output--text').addEventListener('focus', function () {
+        this.value = null;
+      });
+      const richtext = document.getElementById('output--richtext');
+      richtext.addEventListener('focus', function () {
+        this.innerHTML = null;
+      });
+      richtext.addEventListener('paste', function () {
+        this.classList.remove('pristine');
+      });
+      richtext.addEventListener('blur', function () {
+        if (this.innerHTML.length === 0) {
+          this.insertAdjacentHTML('afterbegin', '<span>Rich Text Testing Area</span>');
+          this.classList.add('pristine');
+        }
+      });
+    </script>
+  </body>
+</html>

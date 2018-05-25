@@ -22,6 +22,6 @@ Heavily inspired by the [CoLT](https://github.com/jgbishop/colt) add-on, using c
     * Conditional logic for templates
     * Further enhancements TBA
 * ~~Requested: Rich Text format~~
-* Improve and expose test page
+* ~~Improve and expose test page~~
 * Copy actions for (linked) images
 * Make extension work in Chrome/Opera/Edge
