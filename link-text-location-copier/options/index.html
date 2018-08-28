@@ -91,10 +91,14 @@
 
       <button class="browser-style" type="button" id="addCustomFormat">Add menuitem</button>
       <button class="browser-style" type="button" id="addSeparator">Add separator</button>
-      <span class="checkboxItem browser-style">
+      <div class="checkboxItem browser-style">
         <label><input type="checkbox" id="decodedURI" class="browser-style"/> Don’t encode link location</label>
         (<a href="https://evilnickname.github.io/link-text-location-copier/#option-urls">what’s this?</a>)
-      </span>
+      </div>
+      <div class="checkboxItem browser-style">
+        <label><input type="checkbox" id="dontStripUTM" class="browser-style"/> Don’t strip UTM paramaters from link</label>
+        (<a href="https://evilnickname.github.io/link-text-location-copier/#strip-utm">what’s this?</a>)
+      </div>
       <div>
         <button class="browser-style" type="button" id="export">Export settings</button>
         <input type="file" id="import" accept="text/plain" hidden></button>

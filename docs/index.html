@@ -79,11 +79,11 @@
         <div class="meta">
           <h3 class="meta__title">
             <img src="images/paint-brush.svg" alt="" />
-            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.7.2</a>
+            <a href="https://addons.mozilla.org/en-US/firefox/addon/link-text-and-location-copier/">Download <b>Link Text and Location Copier</b> 1.8.0</a>
           </h3>
           <div class="meta__content">
             <ul class="meta__data">
-              <li>Released on May 25nd, 2018</li>
+              <li>Released on August 28th, 2018</li>
               <li><strong>Requires:</strong> Firefox 56+</li>
             </ul>
 
@@ -172,6 +172,7 @@
       <article id="changelog">
         <h2><svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg> Changelog</h2>
         <ul class="changelog">
+          <li><span class="changelog__version">1.8.0</span><time class="changelog__pubdate">2018-08-28</time><span class="changelog__desc">UTM-paramaters are now stripped from the copied link by default.</span></li>
           <li><span class="changelog__version">1.7.2</span><time class="changelog__pubdate">2018-05-25</time><span class="changelog__desc">Fixes an issue where the link location was <code>undefined</code> for text selections when using %U.</span></li>
           <li><span class="changelog__version">1.7.1</span><time class="changelog__pubdate">2018-05-22</time><span class="changelog__desc">Fixed a stupid bug where the values of %linktitle% and %linkurl% were the wrong way around.</span></li>
           <li><span class="changelog__version">1.7.0</span><time class="changelog__pubdate">2018-04-19</time><span class="changelog__desc">Export and import your customized settings. Enabling editing of rich text.</span></li>
@@ -308,6 +309,11 @@
             <h3>Don’t encode link location</h3>
             <p>Firefox encodes non-<abbr>ANSI</abbr> characters (Cyrillic, Greek, Vietnamese, what-have-you) in <a href="https://developer.mozilla.org/en-US/docs/Glossary/URL">URL</a>s by default when copying. Links like <code>https://ru.wikipedia.org/wiki/Браузер</code> get turned into <code>https://ru.wikipedia.org/wiki/%D0%91%D1%80%D0%B0%D1%83%D0%B7%D0%B5%D1%80</code> when pasted.</p>
             <p>To prevent this, turn this feature on and save settings.</p>
+          </li>
+          <li id="strip-utm">
+            <h3>Don’t strip UTM paramaters from link</h3>
+            <p>Some links include <code>utm_</code>-parameters, which are used to send tracking information to Google Analytics. <b>Link Text and Location Copier</b> strips these by default.</p>
+            <p>To override this, turn this feature on and save settings.</p>
           </li>
           <li id="override-menu">
             <h3>Don’t show context menu prefix</h3>

@@ -16,6 +16,9 @@ function checkStoredSettings(storedSettings) {
   if (_settings.useDecodedURI) {
     document.getElementById('decodedURI').checked = true;
   }
+  if (_settings.dontStripUTM) {
+    document.getElementById('dontStripUTM').checked = true;
+  }
 
   buildCustomFormatTable();
 }
@@ -43,6 +46,13 @@ function saveOptions(event) {
   } else {
     _settings.useDecodedURI = false;
   }
+
+  if (document.getElementById('dontStripUTM').checked === true) {
+    _settings.dontStripUTM = true;
+  } else {
+    _settings.dontStripUTM = false;
+  }
+
 
   let savingOptions = browser.storage.local.set(_settings);
   event.preventDefault();

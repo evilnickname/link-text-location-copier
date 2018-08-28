@@ -47,6 +47,21 @@ function setupMenus() {
   }
 }
 
+function stripUTM(link) {
+  const url = new URL(link);
+  const searchParams = new URLSearchParams(url.search);
+  const outParams = new URLSearchParams();
+
+  for (let p of searchParams) {
+    if (p[0].indexOf('utm_') < 0) {
+      outParams.set(p[0], p[1])
+    }
+  }
+  url.search = outParams.toString();
+
+  return url.toString();
+}
+
 // https://gist.github.com/Rob--W/ec23b9d6db9e56b7e4563f1544e0d546
 function escapeHTML(str) {
     // Note: string cast using String; may throw if `str` is non-serializable, e.g. a Symbol.
@@ -84,6 +99,8 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
     text = info.selectionText;
   }
 
+  // strip UTM_ params from links
+  if (_addonSettings.dontStripUTM !== true && link.indexOf('utm_') !== -1) { link = stripUTM(link) }
   // decoded URIs for non-ANSI links when option is toggled
   if (_addonSettings.useDecodedURI === true) { link = window.decodeURIComponent(link) }
   // Always HTML-escape external input to avoid XSS
