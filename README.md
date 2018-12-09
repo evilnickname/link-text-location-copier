@@ -7,7 +7,7 @@ Firefox web extension that helps you creating links right from the context menu.
 
 Heavily inspired by the [CoLT](https://github.com/jgbishop/colt) add-on, using code from Firefox's [context-menu-copy-link-with-types](https://github.com/mdn/webextensions-examples/tree/master/context-menu-copy-link-with-types)  web extension example.
 
-[Paint Brush Icon](https://www.flaticon.com/free-icon/paint-brush_178388) made by [Flat Icons](https://flat-icons.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
+[Paint Brush Icon](https://www.flaticon.com/free-icon/paint-brush_178388) made by Flat Icons is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
 
 ## Roadmap
 * ~~Add fancy icon~~
