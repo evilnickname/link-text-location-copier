@@ -1,0 +1,83 @@
+html {
+  background-color: #f9f9f9;
+}
+
+main {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  margin: 20px -10px -14px;
+  padding: 10px;
+}
+
+header img {
+  height: 3rem;
+}
+
+.optionspage {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  margin: 20px;
+}
+
+.format > td {
+  border: 1px solid #999;
+  padding: 2px 8px;
+}
+
+.format__formatstring {
+  font-family: monospace;
+}
+
+td.checkboxItem {
+  padding: 0;
+}
+.format label {
+  display: table-cell;
+  text-align: center;
+  padding: 8px;
+  width: 80px;
+}
+.format button {
+  margin: 2px;
+}
+.format:first-child button[data-action=up],
+.format:last-child button[data-action=down] {
+  display: none;
+}
+
+.format button[data-action=edit],
+.format:first-child button[data-action=up] {
+  float: left;
+}
+.format button[data-action=remove],
+.format:last-child button[data-action=down] {
+  float: right;
+}
+.format-info b {
+  font-family: monospace;
+}
+
+.modal {
+  width: 50vw;
+  position: fixed;
+  top: 12.5vh;
+}
+.modal::backdrop {
+  background: rgba(255,0,0,.25);
+}
+.modal .input-wrapper {
+  display: flex;
+}
+.modal .input-wrapper label {
+  margin-right: auto;
+  padding-right: 2em;
+}
+.modal .input-wrapper input {
+  width: 70%;
+}
+.modal .format-info {
+  margin: 1em 0;
+}

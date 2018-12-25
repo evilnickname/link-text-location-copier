@@ -3,114 +3,59 @@
   <head>
     <meta charset="utf-8" />
     <title>Link Text and Location Copier settings</title>
-    <style>
-    form {
-      padding: 4px;
-    }
-    .format > td {
-      border: 1px solid #999;
-      padding: 2px 8px;
-    }
-    td.checkboxItem {
-      padding: 0;
-    }
-    .format label {
-      display: table-cell;
-      text-align: center;
-      padding: 8px;
-      width: 80px;
-    }
-    .format button {
-      margin: 2px;
-    }
-    .format:first-child button[data-action=up],
-    .format:last-child button[data-action=down] {
-      display: none;
-    }
-
-    .format button[data-action=edit],
-    .format:first-child button[data-action=up] {
-      float: left;
-    }
-    .format button[data-action=remove],
-    .format:last-child button[data-action=down] {
-      float: right;
-    }
-    .format-info b {
-      font-family: monospace;
-    }
-
-    .modal {
-      width: 50vw;
-      position: fixed;
-      top: 25vh;
-    }
-    .modal::backdrop {
-      background: rgba(255,0,0,.25);
-    }
-    .modal .input-wrapper {
-      display: flex;
-    }
-    .modal .input-wrapper label {
-      margin-right: auto;
-      padding-right: 2em;
-    }
-    .modal .input-wrapper input {
-      width: 70%;
-    }
-    .modal .format-info {
-      margin: 1em 0;
-    }
-
-    .buttons {
-      display: flex;
-    }
-    .buttons > button:first-child {
-      margin-right: auto;
-    }
-    </style>
+    <link rel="stylesheet" href="style.css" />
+    <!-- enable browser styles for local development
+    <link rel="stylesheet" href="chrome://browser/content/extension.css" />
+    -->
   </head>
 
   <body>
-    <h1>Settings</h1>
-    <form>
-      <table id="formats" class="formats">
-        <thead>
-          <tr>
-            <th scope="col">Menu label</th>
-            <th scope="col">Format</th>
-            <th scope="col">Link</th>
-            <th scope="col">Page</th>
-            <th scope="col">Selection</th>
-            <th scope="col">Move</th>
-            <td></td>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+    <div class="optionspage">
+      <header class="panel-section panel-section-header">
+        <div class="icon-section-header"><img src="../paint-brush.svg" alt="" /></div>
+        <div class="text-section-header">Link Text and Location Copier Options Page</div>
+      </header>
+      <main>
+        <form>
+          <table id="formats" class="formats">
+            <thead>
+              <tr>
+                <th scope="col">Menu label</th>
+                <th scope="col">Format</th>
+                <th scope="col">Link</th>
+                <th scope="col">Page</th>
+                <th scope="col">Selection</th>
+                <th scope="col">Move</th>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
 
-      <button class="browser-style" type="button" id="addCustomFormat">Add menuitem</button>
-      <button class="browser-style" type="button" id="addSeparator">Add separator</button>
-      <div class="checkboxItem browser-style">
-        <label><input type="checkbox" id="decodedURI" class="browser-style"/> Don’t encode link location</label>
-        (<a href="https://evilnickname.github.io/link-text-location-copier/#option-urls">what’s this?</a>)
-      </div>
-      <div class="checkboxItem browser-style">
-        <label><input type="checkbox" id="dontStripUTM" class="browser-style"/> Don’t strip UTM paramaters from link</label>
-        (<a href="https://evilnickname.github.io/link-text-location-copier/#strip-utm">what’s this?</a>)
-      </div>
-      <div>
-        <button class="browser-style" type="button" id="export">Export settings</button>
-        <input type="file" id="import" accept=".json" hidden></button>
-        <button class="browser-style" type="button" id="importBtn">Import settings</button>
-      </div>
+          <button class="browser-style" type="button" id="addCustomFormat">Add menuitem</button>
+          <button class="browser-style" type="button" id="addSeparator">Add separator</button>
 
-      <hr />
-      <div class="buttons">
-        <button class="browser-style" type="button" id="reset">Reset defaults</button>
-        <button class="browser-style" type="button" id="save">Save settings</button>
-      </div>
-    </form>
+          <div class="checkboxItem browser-style">
+            <label><input type="checkbox" id="decodedURI" /> Don’t encode link location</label>
+            (<a href="https://evilnickname.github.io/link-text-location-copier/#option-urls" target="_blank" rel="noopener">what’s this?</a>)
+          </div>
+          <div class="checkboxItem browser-style">
+            <label><input type="checkbox" id="dontStripUTM" /> Don’t strip UTM paramaters from link</label>
+            (<a href="https://evilnickname.github.io/link-text-location-copier/#strip-utm" target="_blank" rel="noopener">what’s this?</a>)
+          </div>
+          <div>
+            <button class="browser-style" type="button" id="export">Export settings</button>
+            <input type="file" id="import" accept=".json" hidden></button>
+            <button class="browser-style" type="button" id="importBtn">Import settings</button>
+          </div>
+
+          <footer>
+            <button class="browser-style" type="button" id="reset">Reset defaults</button>
+            <button class="browser-style default" type="button" id="save">Save settings</button>
+          </footer>
+        </form>
+      </main>
+    </div>
 
     <template id="formatrow">
       <tr class="format" data-n="">
