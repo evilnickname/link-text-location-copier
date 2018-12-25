@@ -1,5 +1,6 @@
 let _settings,
-    _$modal = document.getElementById('formatDialog');
+    _$modal = document.getElementById('formatDialog'),
+    _$lastFocused = null;
 
 /*
 On startup, check whether we have stored settings.
@@ -96,7 +97,7 @@ function buildCustomFormatTable() {
             action = e.target.dataset.action;
       switch (action) {
         case 'edit':
-          editFormat(menuitem);
+          editFormat(menuitem, elem);
           break;
         case 'remove':
           removeMenuItem(menuitem);
@@ -113,6 +114,8 @@ function buildCustomFormatTable() {
 }
 
 function addFormat() {
+  _$lastFocused = this;
+
   let data = {},
       _$inputName = document.getElementById('format-displayname'),
       _$inputTemplate = document.getElementById('format-template'),
@@ -157,7 +160,10 @@ function addSeparator() {
   buildCustomFormatTable();
 }
 
-function editFormat(menuItemToEdit) {
+function editFormat(menuItemToEdit, buttonClicked) {
+  console.log(buttonClicked)
+  _$lastFocused = buttonClicked;
+
   let data = _settings.menuItems[menuItemToEdit],
       _$inputName = document.getElementById('format-displayname'),
       _$inputTemplate = document.getElementById('format-template'),
@@ -220,11 +226,17 @@ Array.prototype.move = function (old_index, new_index) {
 };
 
 function showModal() {
+  _$modal.setAttribute('tabindex', '0');
   _$modal.setAttribute('open', true);
+  _$modal.focus();
 }
 
 function closeModal() {
   _$modal.removeAttribute('open');
+  _$modal.removeAttribute('tabindex');  
+  if (_$lastFocused !== null) {
+    _$lastFocused.focus();
+  }
 }
 
 function resetOptions() {

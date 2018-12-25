@@ -1,25 +1,86 @@
+:root {
+  --border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
 html {
   background-color: #f9f9f9;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, sans-serif;
 }
 
 main {
-  margin-top: 20px;
-  padding: 10px;
+  margin-top: 1rem;
+  padding: 0.5rem;
 }
 
-footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
-  margin: 20px -10px -14px;
-  padding: 10px;
+button, input {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  padding: .25rem 8px;
 }
 
-header img {
-  height: 3rem;
+button {
+  background-color: rgba(12, 12, 13, 0.1);
+}
+
+button:hover,
+input:hover {
+  background-color: rgba(12, 12, 13, 0.2);
+}
+
+button:active,
+input:active {
+  background-color: rgba(12, 12, 13, 0.3);
+}
+
+button:focus,
+input:focus {
+  box-shadow: 0 0 0 1px #0a84ff inset, 0 0 0 1px #0a84ff, 0 0 0 4px rgba(10, 132, 255, 0.3);
+}
+
+button.default {
+  background-color: #0060df;
+  color: white;
+}
+
+button.default:hover {
+  background-color: #003eaa;
+}
+
+button.default:active {
+  background-color: #002275;
 }
 
 .optionspage {
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  margin: 20px;
+  border: var(--border);
+  margin: 1rem;
+}
+
+.optionspage__header {
+  border-bottom: var(--border);
+  display: flex;
+  align-items: center;
+}
+
+.optionspage__header > h1 {
+  font-size: 1.25rem;
+}
+
+.optionspage__logo {
+  padding: 0.5rem 0.5rem .25rem;
+}
+.optionspage__logo > img {
+  height: 3rem;
+}
+
+.optionspage__footer {
+  border-top: var(--border);
+  margin: 1rem -0.5rem -0.5rem;
+  padding: 1rem 0.5rem;
+}
+
+.formats th {
+  font-size: 0.75em;
+  text-align: left;
 }
 
 .format > td {
@@ -29,6 +90,7 @@ header img {
 
 .format__formatstring {
   font-family: monospace;
+  white-space: nowrap;
 }
 
 td.checkboxItem {
@@ -60,6 +122,10 @@ td.checkboxItem {
   font-family: monospace;
 }
 
+.buttons {
+  margin: 0.5rem 0 1rem;
+}
+
 .modal {
   width: 50vw;
   position: fixed;
@@ -70,6 +136,7 @@ td.checkboxItem {
 }
 .modal .input-wrapper {
   display: flex;
+  margin-bottom: 0.5rem;
 }
 .modal .input-wrapper label {
   margin-right: auto;

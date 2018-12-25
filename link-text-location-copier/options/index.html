@@ -2,18 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Link Text and Location Copier settings</title>
+    <title>Link Text and Location Copier Options</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- enable browser styles for local development
-    <link rel="stylesheet" href="chrome://browser/content/extension.css" />
-    -->
   </head>
 
   <body>
     <div class="optionspage">
-      <header class="panel-section panel-section-header">
-        <div class="icon-section-header"><img src="../paint-brush.svg" alt="" /></div>
-        <div class="text-section-header">Link Text and Location Copier Options Page</div>
+      <header class="optionspage__header">
+        <div class="optionspage__logo"><img src="../paint-brush.svg" alt="" /></div>
+        <h1>Link Text and Location Copier Options</h1>
       </header>
       <main>
         <form>
@@ -32,8 +29,10 @@
             <tbody></tbody>
           </table>
 
-          <button class="browser-style" type="button" id="addCustomFormat">Add menuitem</button>
-          <button class="browser-style" type="button" id="addSeparator">Add separator</button>
+          <div class="buttons">
+            <button type="button" id="addCustomFormat">Add menuitem</button>
+            <button type="button" id="addSeparator">Add separator</button>
+          </div>
 
           <div class="checkboxItem browser-style">
             <label><input type="checkbox" id="decodedURI" /> Don’t encode link location</label>
@@ -43,15 +42,16 @@
             <label><input type="checkbox" id="dontStripUTM" /> Don’t strip UTM paramaters from link</label>
             (<a href="https://evilnickname.github.io/link-text-location-copier/#strip-utm" target="_blank" rel="noopener">what’s this?</a>)
           </div>
-          <div>
-            <button class="browser-style" type="button" id="export">Export settings</button>
+
+          <div class="buttons">
+            <button type="button" id="export">Export settings</button>
             <input type="file" id="import" accept=".json" hidden></button>
-            <button class="browser-style" type="button" id="importBtn">Import settings</button>
+            <button type="button" id="importBtn">Import settings</button>
           </div>
 
-          <footer>
-            <button class="browser-style" type="button" id="reset">Reset defaults</button>
-            <button class="browser-style default" type="button" id="save">Save settings</button>
+          <footer class="optionspage__footer">
+            <button type="button" id="reset">Reset defaults</button>
+            <button class="default" type="button" id="save">Save settings</button>
           </footer>
         </form>
       </main>
@@ -71,12 +71,12 @@
           <label><input type="checkbox" data-context="selection" /></label>
         </td>
         <td>
-          <button class="browser-style" type="button" data-action="up">▲</button>
-          <button class="browser-style" type="button" data-action="down">▼</button>
+          <button type="button" data-action="up">▲</button>
+          <button type="button" data-action="down">▼</button>
         </td>
         <td>
-          <button class="browser-style" type="button" data-action="edit">edit</button>
-          <button class="browser-style" type="button" data-action="remove">remove</button>
+          <button type="button" data-action="edit">edit</button>
+          <button type="button" data-action="remove">remove</button>
         </td>
       </tr>
     </template>
@@ -94,11 +94,11 @@
           <label><input type="checkbox" data-context="selection" /></label>
         </td>
         <td>
-          <button class="browser-style" type="button" data-action="up">▲</button>
-          <button class="browser-style" type="button" data-action="down">▼</button>
+          <button type="button" data-action="up">▲</button>
+          <button type="button" data-action="down">▼</button>
         </td>
         <td>
-          <button class="browser-style" type="button" data-action="remove">remove</button>
+          <button type="button" data-action="remove">remove</button>
         </td>
       </tr>
     </template>
@@ -114,10 +114,10 @@
           <input type="text" id="format-template" />
         </div>
         <div>
-          <label><input type="checkbox" id="output-as-html" /> Output as rich text </label> (<a href="https://evilnickname.github.io/link-text-location-copier/#rich-text">custom format should be HTML</a>)
+          <label><input type="checkbox" id="output-as-html" /> Output as rich text </label> (<a href="https://evilnickname.github.io/link-text-location-copier/#rich-text" target="_blank" rel="noopener">custom format should be HTML</a>)
         </div>
         <div>
-          <label><input type="checkbox" id="format-title-override" /> Don’t show context menu prefix </label> (<a href="https://evilnickname.github.io/link-text-location-copier/#override-menu">what’s this?</a>)
+          <label><input type="checkbox" id="format-title-override" /> Don’t show context menu prefix </label> (<a href="https://evilnickname.github.io/link-text-location-copier/#override-menu" target="_blank" rel="noopener">what’s this?</a>)
         </div>
         <details class="format-info">
           <summary>Custom format variables</summary>
@@ -134,8 +134,8 @@
           <b>%L</b> — Localized time stamp
         </details>
         <div class="buttons">
-          <button class="browser-style" type="button" data-action="cancel">cancel</button>
-          <button class="browser-style" type="button" data-action="save">save</button>
+          <button type="button" data-action="cancel">cancel</button>
+          <button class="default" type="button" data-action="save">save</button>
         </div>
       </form>
     </dialog>
