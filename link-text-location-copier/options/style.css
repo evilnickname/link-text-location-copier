@@ -127,9 +127,11 @@ td.checkboxItem {
 }
 
 .modal {
-  width: 50vw;
+  max-height: 75vh;
+  overflow-y: auto;
   position: fixed;
   top: 12.5vh;
+  width: 50vw;
 }
 .modal::backdrop {
   background: rgba(255,0,0,.25);

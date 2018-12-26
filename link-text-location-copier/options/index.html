@@ -32,6 +32,9 @@
           <div class="buttons">
             <button type="button" id="addCustomFormat">Add menuitem</button>
             <button type="button" id="addSeparator">Add separator</button>
+            <button type="button" id="export">Export settings</button>
+            <input type="file" id="import" accept=".json" hidden></button>
+            <button type="button" id="importBtn">Import settings</button>
           </div>
 
           <div class="checkboxItem browser-style">
@@ -41,12 +44,6 @@
           <div class="checkboxItem browser-style">
             <label><input type="checkbox" id="dontStripUTM" /> Don’t strip UTM paramaters from link</label>
             (<a href="https://evilnickname.github.io/link-text-location-copier/#strip-utm" target="_blank" rel="noopener">what’s this?</a>)
-          </div>
-
-          <div class="buttons">
-            <button type="button" id="export">Export settings</button>
-            <input type="file" id="import" accept=".json" hidden></button>
-            <button type="button" id="importBtn">Import settings</button>
           </div>
 
           <footer class="optionspage__footer">
@@ -119,6 +116,10 @@
         <div>
           <label><input type="checkbox" id="format-title-override" /> Don’t show context menu prefix </label> (<a href="https://evilnickname.github.io/link-text-location-copier/#override-menu" target="_blank" rel="noopener">what’s this?</a>)
         </div>
+        <div class="buttons">
+          <button type="button" data-action="cancel">cancel</button>
+          <button class="default" type="button" data-action="save">save</button>
+        </div>
         <details class="format-info">
           <summary>Custom format variables</summary>
           <b>%T</b> — Link title, page title, or text selection<br />
@@ -133,10 +134,6 @@
           <b>%B</b> — Tab character<br />
           <b>%L</b> — Localized time stamp
         </details>
-        <div class="buttons">
-          <button type="button" data-action="cancel">cancel</button>
-          <button class="default" type="button" data-action="save">save</button>
-        </div>
       </form>
     </dialog>
 
